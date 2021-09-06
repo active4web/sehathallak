@@ -14,10 +14,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       builder: (context, child) {
-        return SafeArea(
-          child: Directionality(
-              textDirection: TextDirection.rtl, child: LoginScreen()),
-        );
+        return Directionality(
+            textDirection: TextDirection.rtl, child: LoginScreen());
       },
     );
   }
