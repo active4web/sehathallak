@@ -4,6 +4,7 @@ import 'package:se7a_7alalk/modules/authintication/login_screen.dart';
 import 'package:se7a_7alalk/modules/authintication/register_screen.dart';
 import 'package:se7a_7alalk/modules/layout/home_layout.dart';
 import 'package:se7a_7alalk/modules/screens/home_screen.dart';
+import 'package:se7a_7alalk/modules/screens/rewards_screen.dart';
 import 'package:se7a_7alalk/shared/cubit/app_cubit.dart';
 
 void main() {
@@ -18,12 +19,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AppCubit()),
       ],
       child: MaterialApp(
-        initialRoute: HomeLayout.id,
+        initialRoute: RewardsScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           RegisterScreen.id: (context) => RegisterScreen(),
           HomeLayout.id: (context) => HomeLayout(),
           HomeScreen.id: (context) => HomeScreen(),
+          RewardsScreen.id:(context) => RewardsScreen(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(
