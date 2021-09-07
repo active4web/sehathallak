@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:se7a_7alalk/shared/components/custom_arrow_back.dart';
 
 import '../constants.dart';
 
@@ -16,19 +17,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget{
         child: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
-          leading: Container(
-            width: 30,
-            height: 30,
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white
-            ),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black87,
-            ),
-          ),
+          leading: CustomArrowBack(),
           title: Text('مكافئات'),
           centerTitle: true,
           flexibleSpace: Container(

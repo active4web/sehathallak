@@ -69,7 +69,7 @@ class OnBoardingScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
-                color: kScaffoldColor,
+                color: kGreyColor,
               ),
             ),
           ],

@@ -14,7 +14,7 @@ Widget customTextField(
         Text(
           labelText,
           style: TextStyle(
-            color: kScaffoldColor,
+            color: kGreyColor,
             fontSize: 13,
           ),
         ),
@@ -79,7 +79,7 @@ Widget customDropDownMenu(
         Text(
           labelText,
           style: TextStyle(
-            color: kScaffoldColor,
+            color: kGreyColor,
             fontSize: 13,
           ),
         ),

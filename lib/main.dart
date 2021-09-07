@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:se7a_7alalk/modules/layout/home_layout.dart';
+import 'package:se7a_7alalk/modules/screens/add_review_screen.dart';
 import 'package:se7a_7alalk/modules/screens/home_screen.dart';
 import 'package:se7a_7alalk/modules/screens/rewards_screen.dart';
 import 'package:se7a_7alalk/modules/user/countries_screen.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AppCubit()),
       ],
       child: MaterialApp(
-        initialRoute: RewardsScreen.id,
+        initialRoute: AddReviewScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           RegisterScreen.id: (context) => RegisterScreen(),
@@ -38,10 +39,12 @@ class MyApp extends StatelessWidget {
           PerformSurgery.id: (context) => PerformSurgery(),
           HomeScreen.id: (context) => HomeScreen(),
           RewardsScreen.id:(context) => RewardsScreen(),
+          AddReviewScreen.id: (context) => AddReviewScreen(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Color(0xffF9F9F9),
           fontFamily: 'Cairo'
         ),
         builder: (context, child) {
