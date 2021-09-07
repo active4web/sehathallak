@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       "او يمكنك الدخول",
-                      style: TextStyle(color: kScaffoldColor, fontSize: 16),
+                      style: TextStyle(color: kGreyColor, fontSize: 16),
                     ),
                   ),
                   Row(

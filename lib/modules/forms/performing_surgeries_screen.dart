@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:se7a_7alalk/shared/components/custom_dropdown_menu.dart';
+import 'package:se7a_7alalk/shared/components/custom_text_field.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
@@ -86,7 +88,7 @@ class PerformSurgery extends StatelessWidget {
           CustomTextField(
             controller: controller,
             hintText: hintText,
-            maxLines: maxLines,
+            minLines: maxLines,
           )
         ],
       );
@@ -119,60 +121,5 @@ class PerformSurgery extends StatelessWidget {
       );
 }
 
-class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final String hintText;
-  int maxLines = 1;
-  CustomTextField({this.controller, this.hintText, this.maxLines});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      child: TextField(
-        controller: controller,
-        maxLines: maxLines,
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: TextStyle(fontSize: 12, color: kScaffoldColor),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide(color: kScaffoldColor)),
-        ),
-      ),
-    );
-  }
-}
 
-class CustomDropDownMenu extends StatelessWidget {
-  final dynamic value;
-  final String hintText;
-  final Function onChange;
-  final List<DropdownMenuItem> items;
-  const CustomDropDownMenu(
-      {this.value, this.hintText, this.onChange, this.items});
-
-  @override
-  Widget build(BuildContext context) {
-    return InputDecorator(
-      decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: Container(
-          height: 50,
-          child: DropdownButton(
-              itemHeight: 50,
-              value: value,
-              isDense: true,
-              hint: Text(
-                hintText,
-                style: TextStyle(fontSize: 12, color: kScaffoldColor),
-              ),
-              onChanged: onChange,
-              items: items),
-        ),
-      ),
-    );
-  }
-}

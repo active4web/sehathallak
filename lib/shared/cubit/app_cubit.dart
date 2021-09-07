@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:se7a_7alalk/modules/screens/home_screen.dart';
 import 'package:se7a_7alalk/shared/cubit/app_states.dart';
 
 class AppCubit extends Cubit<AppStates>{
@@ -9,9 +10,7 @@ class AppCubit extends Cubit<AppStates>{
   static AppCubit get(context) => BlocProvider.of(context);
 
   List<Widget> screens = [
-    Scaffold(
-      body: Center(child: Text('الرئيسية')),
-    ),
+    HomeScreen(),
     Scaffold(
       body: Center(child: Text('تحصين')),
     ),

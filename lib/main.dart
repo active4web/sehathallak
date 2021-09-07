@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:se7a_7alalk/modules/layout/home_layout.dart';
+import 'package:se7a_7alalk/modules/screens/add_review_screen.dart';
+import 'package:se7a_7alalk/modules/screens/home_screen.dart';
+import 'package:se7a_7alalk/modules/screens/rewards_screen.dart';
 import 'package:se7a_7alalk/modules/user/countries_screen.dart';
 import 'package:se7a_7alalk/shared/cubit/app_cubit.dart';
 import 'modules/forms/performing_surgeries_screen.dart';
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AppCubit()),
       ],
       child: MaterialApp(
-        initialRoute: PerformSurgery.id,
+        initialRoute: AddReviewScreen.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           RegisterScreen.id: (context) => RegisterScreen(),
@@ -34,10 +37,15 @@ class MyApp extends StatelessWidget {
           ChangePasswordScreen.id: (context) => ChangePasswordScreen(),
           CountriesScreen.id: (context) => CountriesScreen(),
           PerformSurgery.id: (context) => PerformSurgery(),
+          HomeScreen.id: (context) => HomeScreen(),
+          RewardsScreen.id:(context) => RewardsScreen(),
+          AddReviewScreen.id: (context) => AddReviewScreen(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Color(0xffF9F9F9),
+          fontFamily: 'Cairo'
         ),
         builder: (context, child) {
           return Directionality(textDirection: TextDirection.rtl, child: child);
