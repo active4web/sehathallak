@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const String id = "loginScreen";
+class RegisterScreen extends StatelessWidget {
+  static const String id = "registerScreen";
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: kAppColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -29,15 +28,15 @@ class LoginScreen extends StatelessWidget {
                     height: 220,
                   ),
                   Text(
-                    "تسجيل دخول",
+                    "تسجيل حساب",
                     style: TextStyle(
                         fontSize: 22,
                         color: kAppSecondColor,
                         fontWeight: FontWeight.bold),
                   ),
                   customTextField(
-                      labelText: "البريد الالكتروني / رقم الجوال",
-                      hintText: "Moha123456@gmail.com",
+                      labelText: "اسم المستخدم",
+                      hintText: "Moha123456",
                       prefixIcon: CupertinoIcons.person),
                   customTextField(
                       labelText: "كلمة المرور",
