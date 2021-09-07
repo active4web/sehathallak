@@ -5,6 +5,7 @@ import 'package:se7a_7alalk/shared/cubit/app_cubit.dart';
 import 'package:se7a_7alalk/shared/cubit/app_states.dart';
 
 class HomeLayout extends StatelessWidget {
+  static const String id = "homeLayout";
   HomeLayout({this.selectedIndex});
   int selectedIndex = 0;
   @override
@@ -55,8 +56,7 @@ class HomeLayout extends StatelessWidget {
                           icon: Icon(Icons.volunteer_activism),
                           label: ' تحصين '),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.medical_services),
-                          label: ' خدمات '),
+                          icon: Icon(Icons.medical_services), label: ' خدمات '),
                       BottomNavigationBarItem(
                         icon: Icon(Icons.access_time),
                         label: 'حجز عيادة',

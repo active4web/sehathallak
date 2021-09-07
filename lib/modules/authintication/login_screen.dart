@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:se7a_7alalk/modules/authintication/register_screen.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
@@ -85,14 +86,19 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Text.rich(TextSpan(
-                text: "ليس لديك حساب ؟ ",
-                style: TextStyle(color: Colors.white),
-                children: [
-                  TextSpan(
-                      text: "سجل الان",
-                      style: TextStyle(color: kAppSecondColor))
-                ]))
+            InkWell(
+              onTap: () {
+                navigateTo(context: context, page: RegisterScreen.id);
+              },
+              child: Text.rich(TextSpan(
+                  text: "ليس لديك حساب ؟ ",
+                  style: TextStyle(color: Colors.white),
+                  children: [
+                    TextSpan(
+                        text: "سجل الان",
+                        style: TextStyle(color: kAppSecondColor))
+                  ])),
+            )
           ],
         ),
       ),

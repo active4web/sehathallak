@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:se7a_7alalk/modules/authintication/login_screen.dart';
+import 'package:se7a_7alalk/modules/authintication/register_screen.dart';
 import 'package:se7a_7alalk/modules/layout/home_layout.dart';
 import 'package:se7a_7alalk/shared/cubit/app_cubit.dart';
 
@@ -13,18 +14,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider( create: (context) => AppCubit()),
-
+        BlocProvider(create: (context) => AppCubit()),
       ],
       child: MaterialApp(
-        home:HomeLayout(),
+        initialRoute: LoginScreen.id,
+        routes: {
+          LoginScreen.id: (context) => LoginScreen(),
+          RegisterScreen.id: (context) => RegisterScreen(),
+          HomeLayout.id: (context) => HomeLayout(),
+        },
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
         builder: (context, child) {
-          return Directionality(
-              textDirection: TextDirection.rtl, child: child);
+          return Directionality(textDirection: TextDirection.rtl, child: child);
         },
       ),
     );
