@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
 
 class CustomDropDownMenu extends StatelessWidget {
@@ -14,22 +13,18 @@ class CustomDropDownMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return InputDecorator(
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
-      ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          constraints: BoxConstraints(maxHeight: 61)),
       child: DropdownButtonHideUnderline(
-        child: Container(
-          height: 50,
-          child: DropdownButton(
-              itemHeight: 50,
-              value: value,
-              isDense: true,
-              hint: Text(
-                hintText,
-                style: TextStyle(fontSize: 12, color: kGreyColor),
-              ),
-              onChanged: onChange,
-              items: items),
-        ),
+        child: DropdownButton(
+            value: value,
+            isDense: true,
+            hint: Text(
+              hintText,
+              style: TextStyle(fontSize: 12, color: kGreyColor),
+            ),
+            onChanged: onChange,
+            items: items),
       ),
     );
   }

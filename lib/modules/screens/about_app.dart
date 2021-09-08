@@ -2,21 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key key}) : super(key: key);
-
-  static const String id = "HomeScreen";
+class AboutAppScreen extends StatelessWidget {
+  static const String id = "AboutAppScreen";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      backgroundColor:  Color(0xffF8F8F8),
+      backgroundColor: Color(0xffF8F8F8),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Text('عن التطبيق',style: TextStyle(
-          color: Colors.white,
-        ),),
+        title: Text(
+          'عن التطبيق',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true,
       ),
       body: Stack(
@@ -26,13 +27,12 @@ class HomeScreen extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  gradient: kAppGradient,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(12),
-                    bottomRight: Radius.circular(12),
-                  )
-                ),
-                height: MediaQuery.of(context).size.height*0.6,
+                    gradient: kAppGradient,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12),
+                    )),
+                height: MediaQuery.of(context).size.height * 0.6,
               )
             ],
           ),
@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             top: 280,
-            height: MediaQuery.of(context).size.height*0.5,
+            height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -64,18 +64,20 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text('عن التطبيق',style: TextStyle(
-                          color: kAppColor,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold
-                        ),),
+                        Text(
+                          'عن التطبيق',
+                          style: TextStyle(
+                              color: kAppColor,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ],
                     ),
                     Container(
-                      child: Text(kAboutAppText,style: TextStyle(
-                        fontSize: 13,
-                        color: kAppColor
-                      ),),
+                      child: Text(
+                        kAboutAppText,
+                        style: TextStyle(fontSize: 13, color: kAppColor),
+                      ),
                     )
                   ],
                 ),

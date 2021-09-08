@@ -4,31 +4,42 @@ import 'package:se7a_7alalk/shared/components/custom_text_field.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
-class PerformSurgery extends StatelessWidget {
-  static const String id = "performSurgery";
-  final TextEditingController farmName = TextEditingController();
+class HomeVisit extends StatelessWidget {
+  static const String id = "homeVisit";
+  final TextEditingController animalOwner = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController accountNumber = TextEditingController();
   final String animalType = "";
   final TextEditingController animalsNumber = TextEditingController();
   final String country = "";
-  final TextEditingController surgeryType = TextEditingController();
+  final String serviceType = "";
   final TextEditingController surgeryTime = TextEditingController();
   final TextEditingController description = TextEditingController();
-  final TextEditingController examinationPurpose = TextEditingController();
   final TextEditingController otherNotes = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "اجراء العمليات الجراحية ", context: context),
+      appBar: customAppBar(title: "حجز زيارة منزلية", context: context),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
+            Text(
+              "نبذة عن الخدمة والمزايا التي سيتم تقديمها",
+              style: TextStyle(
+                  color: kAppColor, fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "أنت على بعد دوسه واحدة من زيارتك المنزلية ، املأ المعلومات وخلينا نساعدك",
+              style: TextStyle(fontSize: 15),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             textFieldWithTitle(
-                title: "اسم صاحب المزرعة",
+                title: "اسم صاحب الحيوان",
                 hintText: "يتم كتابة الاسم تلقائي في حالة الاشتراك المسبق ",
-                controller: farmName),
+                controller: animalOwner),
             textFieldWithTitle(
                 title: "رقم الموبيل",
                 hintText: "يتم كتابة الموبيل تلقائي في حالة الاشتراك المسبق",
@@ -40,7 +51,7 @@ class PerformSurgery extends StatelessWidget {
             dropDownMenuWithTitle(
                 hintText: "حدد",
                 value: animalType,
-                title: "نوع الحيوان / الطير ",
+                title: "نوع الحيوان",
                 items: [],
                 onChanged: (value) {}),
             Row(
@@ -64,15 +75,17 @@ class PerformSurgery extends StatelessWidget {
                 ),
               ],
             ),
+            dropDownMenuWithTitle(
+                hintText: "الخدمة المطلوبه في الزياره (متعدد)",
+                value: serviceType,
+                title: "الباقة المراد الاشتراك فيها",
+                items: [],
+                onChanged: (value) {}),
             textFieldWithTitle(
-                title: "نوع الجراحة المطلوبة",
-                hintText: "نوع الجراحة المطلوبة",
-                controller: surgeryType),
-            textFieldWithTitle(
-                title: "الموعد المناسب للكشف",
+                title: "الموعد المناسب للزياره",
+                hintText: "الموعد المناسب للكشف",
                 suffixIcon: InkWell(
                     onTap: () {}, child: Icon(Icons.calendar_today_outlined)),
-                hintText: "الموعد المناسب للكشف",
                 controller: surgeryTime),
             textFieldWithTitle(
                 title: "العنوان بالتفصيل",
@@ -84,20 +97,15 @@ class PerformSurgery extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.location_on_outlined,
-                    color: kAppSecondColor,
+                    color: kAppColor,
                   ),
                   Text(
                     "حدد العنوان على الخريطة",
-                    style: TextStyle(color: kAppSecondColor),
+                    style: TextStyle(color: kAppColor),
                   )
                 ],
               ),
             ),
-            textFieldWithTitle(
-                title: "نبذة عن الحالة المرضية أو الغرض من الكشف",
-                hintText: "الشكوي المرضية التي يعاني منها الحيوان",
-                maxLines: 5,
-                controller: examinationPurpose),
             textFieldWithTitle(
                 title: "ملاحظات أخري",
                 hintText: "الشكوي المرضية التي يعاني منها الحيوان",
@@ -105,7 +113,8 @@ class PerformSurgery extends StatelessWidget {
                 controller: otherNotes),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: customButton(text: "ارسال الطلب", onPressed: () {}),
+              child:
+                  customButton(text: "احجز زيارتي المنزليه", onPressed: () {}),
             ),
           ],
         ),

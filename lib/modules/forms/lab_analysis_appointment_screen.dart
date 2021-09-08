@@ -4,43 +4,52 @@ import 'package:se7a_7alalk/shared/components/custom_text_field.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
-class PerformSurgery extends StatelessWidget {
-  static const String id = "performSurgery";
-  final TextEditingController farmName = TextEditingController();
+class LapAnalysisAppointment extends StatelessWidget {
+  static const String id = "lapAnalysisAppointment";
+  final TextEditingController name = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
-  final TextEditingController accountNumber = TextEditingController();
+  final TextEditingController cardNumber = TextEditingController();
+  final TextEditingController possessionNumber = TextEditingController();
   final String animalType = "";
+  final String immunizationType = "";
   final TextEditingController animalsNumber = TextEditingController();
   final String country = "";
-  final TextEditingController surgeryType = TextEditingController();
+  final String serviceType = "";
   final TextEditingController surgeryTime = TextEditingController();
   final TextEditingController description = TextEditingController();
-  final TextEditingController examinationPurpose = TextEditingController();
   final TextEditingController otherNotes = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "اجراء العمليات الجراحية ", context: context),
+      appBar: customAppBar(title: "طلب تحليل مخبري", context: context),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
             textFieldWithTitle(
-                title: "اسم صاحب المزرعة",
+                title: "الاسم",
                 hintText: "يتم كتابة الاسم تلقائي في حالة الاشتراك المسبق ",
-                controller: farmName),
+                controller: name),
             textFieldWithTitle(
                 title: "رقم الموبيل",
                 hintText: "يتم كتابة الموبيل تلقائي في حالة الاشتراك المسبق",
                 controller: phoneNumber),
             textFieldWithTitle(
-                title: "رقم  حساب صحة حلالك",
-                hintText: "يتم كتابة رقم الحساب تلقائي في حالة الاشتراك المسبق",
-                controller: accountNumber),
+                title: "رقم البطاقة", hintText: "", controller: cardNumber),
+            textFieldWithTitle(
+                title: "رقم الحيازة",
+                hintText: "رقم الحيازة",
+                controller: possessionNumber),
             dropDownMenuWithTitle(
                 hintText: "حدد",
                 value: animalType,
                 title: "نوع الحيوان / الطير ",
+                items: [],
+                onChanged: (value) {}),
+            dropDownMenuWithTitle(
+                hintText: "نوع التحليل المطلوب",
+                value: immunizationType,
+                title: "نوع التحليل المطلوب",
                 items: [],
                 onChanged: (value) {}),
             Row(
@@ -65,14 +74,10 @@ class PerformSurgery extends StatelessWidget {
               ],
             ),
             textFieldWithTitle(
-                title: "نوع الجراحة المطلوبة",
-                hintText: "نوع الجراحة المطلوبة",
-                controller: surgeryType),
-            textFieldWithTitle(
-                title: "الموعد المناسب للكشف",
+                title: "الموعد المناسب للتحليل",
+                hintText: "الموعد المناسب للتحليل",
                 suffixIcon: InkWell(
                     onTap: () {}, child: Icon(Icons.calendar_today_outlined)),
-                hintText: "الموعد المناسب للكشف",
                 controller: surgeryTime),
             textFieldWithTitle(
                 title: "العنوان بالتفصيل",
@@ -84,20 +89,15 @@ class PerformSurgery extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.location_on_outlined,
-                    color: kAppSecondColor,
+                    color: kAppColor,
                   ),
                   Text(
                     "حدد العنوان على الخريطة",
-                    style: TextStyle(color: kAppSecondColor),
+                    style: TextStyle(color: kAppColor),
                   )
                 ],
               ),
             ),
-            textFieldWithTitle(
-                title: "نبذة عن الحالة المرضية أو الغرض من الكشف",
-                hintText: "الشكوي المرضية التي يعاني منها الحيوان",
-                maxLines: 5,
-                controller: examinationPurpose),
             textFieldWithTitle(
                 title: "ملاحظات أخري",
                 hintText: "الشكوي المرضية التي يعاني منها الحيوان",

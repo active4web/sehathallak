@@ -4,8 +4,8 @@ import 'package:se7a_7alalk/shared/components/custom_text_field.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
-class PerformSurgery extends StatelessWidget {
-  static const String id = "performSurgery";
+class RequestTreatment extends StatelessWidget {
+  static const String id = "requestTreatment";
   final TextEditingController farmName = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController accountNumber = TextEditingController();
@@ -20,7 +20,7 @@ class PerformSurgery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "اجراء العمليات الجراحية ", context: context),
+      appBar: customAppBar(title: "خدمات العلاج", context: context),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
@@ -65,14 +65,10 @@ class PerformSurgery extends StatelessWidget {
               ],
             ),
             textFieldWithTitle(
-                title: "نوع الجراحة المطلوبة",
-                hintText: "نوع الجراحة المطلوبة",
-                controller: surgeryType),
-            textFieldWithTitle(
                 title: "الموعد المناسب للكشف",
+                hintText: "الموعد المناسب للكشف",
                 suffixIcon: InkWell(
                     onTap: () {}, child: Icon(Icons.calendar_today_outlined)),
-                hintText: "الموعد المناسب للكشف",
                 controller: surgeryTime),
             textFieldWithTitle(
                 title: "العنوان بالتفصيل",
@@ -84,11 +80,11 @@ class PerformSurgery extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.location_on_outlined,
-                    color: kAppSecondColor,
+                    color: kAppColor,
                   ),
                   Text(
                     "حدد العنوان على الخريطة",
-                    style: TextStyle(color: kAppSecondColor),
+                    style: TextStyle(color: kAppColor),
                   )
                 ],
               ),

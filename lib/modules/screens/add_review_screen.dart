@@ -114,14 +114,25 @@ class AddReviewScreen extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 30,),
-              CustomTextField(hintText: 'عنوان التقييم',),
-              SizedBox(height: 22,),
-              CustomTextField(hintText: 'اخبرنا بالمزيد',minLines: 4,),
-              SizedBox(height: 80,),
-              customButton(text: 'اضف تقييمك',
-              width: MediaQuery.of(context).size.width-80)
-
+              SizedBox(
+                height: 30,
+              ),
+              CustomTextField(
+                hintText: 'عنوان التقييم',
+              ),
+              SizedBox(
+                height: 22,
+              ),
+              CustomTextField(
+                hintText: 'اخبرنا بالمزيد',
+                maxLines: 4,
+              ),
+              SizedBox(
+                height: 80,
+              ),
+              customButton(
+                  text: 'اضف تقييمك',
+                  width: MediaQuery.of(context).size.width - 80)
             ],
           ),
         ),

@@ -52,12 +52,15 @@ Future navigateTo({BuildContext context, String page}) =>
 Future navigateToAndStop({BuildContext context, String page}) =>
     Navigator.pushNamedAndRemoveUntil(context, page, (route) => false);
 
-Widget customAppBar({String title}) => AppBar(
+Widget customAppBar({String title, BuildContext context}) => AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
+      automaticallyImplyLeading: false,
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             color: Colors.white,
             icon: Icon(Icons.arrow_forward, color: Colors.black)),
         SizedBox(
@@ -66,7 +69,8 @@ Widget customAppBar({String title}) => AppBar(
       ],
       title: Text(
         title,
-        style: TextStyle(color: Colors.black, fontSize: 18),
+        textAlign: TextAlign.center,
+        style: TextStyle(color: Colors.black, fontSize: 15),
       ),
       centerTitle: true,
     );

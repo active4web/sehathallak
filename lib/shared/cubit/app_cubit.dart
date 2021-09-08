@@ -2,15 +2,18 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:se7a_7alalk/modules/screens/home_screen.dart';
+import 'package:se7a_7alalk/modules/screens/about_app.dart';
+import 'package:se7a_7alalk/modules/user/more_screen.dart';
 import 'package:se7a_7alalk/shared/cubit/app_states.dart';
 
-class AppCubit extends Cubit<AppStates>{
+class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
 
   List<Widget> screens = [
-    HomeScreen(),
+    Scaffold(
+      body: Center(child: Text('الرئيسية')),
+    ),
     Scaffold(
       body: Center(child: Text('تحصين')),
     ),
@@ -23,9 +26,7 @@ class AppCubit extends Cubit<AppStates>{
     Scaffold(
       body: Center(child: Text('حجز عيادات')),
     ),
-    Scaffold(
-      body: Center(child: Text('المزيد')),
-    ),
+    MoreScreen()
   ];
 
   int selectedIndex = 0;
@@ -33,5 +34,4 @@ class AppCubit extends Cubit<AppStates>{
     selectedIndex = value;
     emit(ChangeNavBarState());
   }
-
 }

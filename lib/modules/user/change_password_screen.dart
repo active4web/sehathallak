@@ -8,7 +8,7 @@ class ChangePasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "الملف الشخصي"),
+      appBar: customAppBar(title: "الملف الشخصي", context: context),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
