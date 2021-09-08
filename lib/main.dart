@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AppCubit()),
       ],
       child: MaterialApp(
-        initialRoute: AddReviewScreen.id,
+        initialRoute: PerformSurgery.id,
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           RegisterScreen.id: (context) => RegisterScreen(),
@@ -38,15 +38,14 @@ class MyApp extends StatelessWidget {
           CountriesScreen.id: (context) => CountriesScreen(),
           PerformSurgery.id: (context) => PerformSurgery(),
           HomeScreen.id: (context) => HomeScreen(),
-          RewardsScreen.id:(context) => RewardsScreen(),
+          RewardsScreen.id: (context) => RewardsScreen(),
           AddReviewScreen.id: (context) => AddReviewScreen(),
         },
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: Color(0xffF9F9F9),
-          fontFamily: 'Cairo'
-        ),
+            primarySwatch: Colors.blue,
+            scaffoldBackgroundColor: Color(0xffF9F9F9),
+            fontFamily: 'Cairo'),
         builder: (context, child) {
           return Directionality(textDirection: TextDirection.rtl, child: child);
         },
