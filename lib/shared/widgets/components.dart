@@ -32,13 +32,16 @@ Widget customTextField(
     );
 
 Widget customButton(
-        {String text, double width = double.infinity, Function onPressed}) =>
+        {String text,
+        double width = double.infinity,
+        double height = 50,
+        Function onPressed}) =>
     Container(
       decoration: BoxDecoration(gradient: kAppGradient),
       child: MaterialButton(
         onPressed: onPressed,
         minWidth: width,
-        height: 50,
+        height: height,
         child: Text(
           text,
           style: TextStyle(color: Colors.white),
@@ -95,4 +98,23 @@ Widget customDropDownMenu(
           onChanged: onChanged,
         ))
       ],
+    );
+
+Widget buildImageContainer({String title, IconData icon, Function onPressed}) =>
+    InkWell(
+      onTap: () {},
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey,
+            ),
+            borderRadius: BorderRadius.circular(15)),
+        child: TextButton.icon(
+            onPressed: onPressed,
+            icon: Icon(icon, color: Colors.grey),
+            label: Text(
+              title,
+              style: TextStyle(color: Colors.grey),
+            )),
+      ),
     );

@@ -35,7 +35,14 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   country_code_picker: ^2.0.2
   smooth_page_indicator: ^1.0.0+2
-  flutter_native_splash: 
+  flutter_native_splash:
+  carousel_slider:
+  shared_preferences:
+  dio:
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+
 
 
 
@@ -64,6 +71,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   assets:

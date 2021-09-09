@@ -3,14 +3,14 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 
-class VeterinaryMedicine extends StatelessWidget {
-  static const String id = "veterinaryMedicine";
+class VeterinaryFortifications extends StatelessWidget {
+  static const String id = "VeterinaryFortifications";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        title: "الادوية البيطرية",
+        title: "تحصينات بيطرية",
         actions: true,
       ),
       body: Column(

@@ -9,17 +9,32 @@ import 'package:se7a_7alalk/modules/forms/request_treatment.dart';
 import 'package:se7a_7alalk/modules/forms/supervision_of_farms.dart';
 import 'package:se7a_7alalk/modules/forms/wool_shearing_services_screen.dart';
 import 'package:se7a_7alalk/modules/layout/home_layout.dart';
+import 'package:se7a_7alalk/modules/layout/layout_screens/home_screen.dart';
 import 'package:se7a_7alalk/modules/screens/add_review_screen.dart';
-import 'package:se7a_7alalk/modules/screens/about_app.dart';
-import 'package:se7a_7alalk/modules/screens/rewards_screen.dart';
+import 'package:se7a_7alalk/modules/screens/clinic_details.dart';
+import 'package:se7a_7alalk/modules/screens/clinics.dart';
+import 'package:se7a_7alalk/modules/screens/home_visit_services.dart';
+import 'package:se7a_7alalk/modules/screens/reservation_of_specialty_clinics.dart';
+import 'package:se7a_7alalk/modules/user/about_app.dart';
+import 'package:se7a_7alalk/modules/user/customer_support.dart';
+import 'package:se7a_7alalk/modules/user/notification_settings.dart';
+import 'package:se7a_7alalk/modules/user/questions_and_answers.dart';
+import 'package:se7a_7alalk/modules/user/rewards_screen.dart';
+import 'package:se7a_7alalk/modules/store/medicine.dart';
+import 'package:se7a_7alalk/modules/store/selling_animal_feed.dart';
+import 'package:se7a_7alalk/modules/store/veterinary_fortifications.dart';
+import 'package:se7a_7alalk/modules/store/veterinary_medicine_screen.dart';
+import 'package:se7a_7alalk/modules/store/veterinary_supplies.dart';
 import 'package:se7a_7alalk/modules/user/change_password_screen.dart';
 import 'package:se7a_7alalk/modules/user/countries_screen.dart';
 import 'package:se7a_7alalk/modules/user/login_screen.dart';
-import 'package:se7a_7alalk/modules/user/more_screen.dart';
+import 'package:se7a_7alalk/modules/layout/layout_screens/more_screen.dart';
+import 'package:se7a_7alalk/modules/user/my_offers_screen.dart';
 import 'package:se7a_7alalk/modules/user/onboarding_screen.dart';
 import 'package:se7a_7alalk/modules/user/profile_screen.dart';
 import 'package:se7a_7alalk/modules/user/register_screen.dart';
 import 'package:se7a_7alalk/modules/user/settings_screen.dart';
+import 'package:se7a_7alalk/modules/user/support_message.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
   LoginScreen.id: (context) => LoginScreen(),
@@ -44,4 +59,20 @@ Map<String, Widget Function(BuildContext)> routes = {
   RewardsScreen.id: (context) => RewardsScreen(),
   AddReviewScreen.id: (context) => AddReviewScreen(),
   MoreScreen.id: (context) => MoreScreen(),
+  HomeScreen.id: (context) => HomeScreen(),
+  MyOffersScreen.id: (context) => MyOffersScreen(),
+  VeterinaryMedicine.id: (context) => VeterinaryMedicine(),
+  VeterinaryFortifications.id: (context) => VeterinaryFortifications(),
+  VeterinarySupplies.id: (context) => VeterinarySupplies(),
+  SellingAnimalFeed.id: (context) => SellingAnimalFeed(),
+  Medicine.id: (context) => Medicine(),
+  Clinics.id: (context) => Clinics(),
+  ClinicDetails.id: (context) => ClinicDetails(),
+  HomeVisitServices.id: (context) => HomeVisitServices(),
+  SupportMessage.id: (context) => SupportMessage(),
+  CustomerSupport.id: (context) => CustomerSupport(),
+  NotificationSettings.id: (context) => NotificationSettings(),
+  QuestionsAndAnswers.id: (context) => QuestionsAndAnswers(),
+  ReservationOfSpecialtyClinics.id: (context) =>
+      ReservationOfSpecialtyClinics(),
 };

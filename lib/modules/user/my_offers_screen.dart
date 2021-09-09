@@ -3,26 +3,35 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 
-class VeterinaryMedicine extends StatelessWidget {
-  static const String id = "veterinaryMedicine";
+class MyOffersScreen extends StatelessWidget {
+  static const String id = "myOffers";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        title: "الادوية البيطرية",
+        title: "عروض خاصة",
         actions: true,
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildCategorySlider(),
-          SizedBox(
-            height: 10,
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text("أدويه الحيوانات الاليفة"),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "عدد العروض(4)",
+                  style: TextStyle(color: kAppColor),
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.filter_alt_outlined,
+                      color: kAppColor,
+                    ))
+              ],
+            ),
           ),
           Expanded(
             child: GridView.count(
@@ -39,46 +48,6 @@ class VeterinaryMedicine extends StatelessWidget {
     );
   }
 
-  Widget buildCategorySlider() => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Text(
-              "التحصينات البيطرية",
-              style: TextStyle(fontSize: 14),
-            ),
-          ),
-          Container(
-            height: 100,
-            child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Row(
-                        children: [
-                          Image.asset("assets/images/test.png"),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "تحصين الحيوانات الاليفة",
-                            maxLines: 1,
-                          )
-                        ],
-                      ),
-                    ),
-                separatorBuilder: (context, index) => SizedBox(
-                      width: 10,
-                    ),
-                itemCount: 3),
-          )
-        ],
-      );
   Widget buildProductCard() => Stack(
         children: [
           Container(

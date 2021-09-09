@@ -12,18 +12,21 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextField(
-        controller: controller,
-        maxLines: maxLines,
-        decoration: InputDecoration(
-          hintText: hintText,
-          isDense: true,
-          suffixIcon: suffixIcon,
-          hintStyle: TextStyle(fontSize: 12, color: kGreyColor),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: kGreyColor)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Container(
+        child: TextField(
+          controller: controller,
+          maxLines: maxLines,
+          decoration: InputDecoration(
+            hintText: hintText,
+            isDense: true,
+            suffixIcon: suffixIcon,
+            hintStyle: TextStyle(fontSize: 12, color: kGreyColor),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(color: kGreyColor)),
+          ),
         ),
       ),
     );

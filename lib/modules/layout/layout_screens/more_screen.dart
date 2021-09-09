@@ -4,21 +4,32 @@ import 'package:se7a_7alalk/modules/forms/Book_a_vaccination_appointment_screen.
 import 'package:se7a_7alalk/modules/forms/book_appointment_screen.dart';
 import 'package:se7a_7alalk/modules/forms/emergency_booking_screen.dart';
 import 'package:se7a_7alalk/modules/forms/lab_analysis_appointment_screen.dart';
-import 'package:se7a_7alalk/modules/screens/about_app.dart';
-import 'package:se7a_7alalk/modules/screens/rewards_screen.dart';
+import 'package:se7a_7alalk/modules/screens/clinics.dart';
+import 'package:se7a_7alalk/modules/screens/reservation_of_specialty_clinics.dart';
+import 'package:se7a_7alalk/modules/user/about_app.dart';
+import 'package:se7a_7alalk/modules/user/customer_support.dart';
+import 'package:se7a_7alalk/modules/user/notification_settings.dart';
+import 'package:se7a_7alalk/modules/user/questions_and_answers.dart';
+import 'package:se7a_7alalk/modules/user/rewards_screen.dart';
+import 'package:se7a_7alalk/modules/store/selling_animal_feed.dart';
+import 'package:se7a_7alalk/modules/store/veterinary_fortifications.dart';
+import 'package:se7a_7alalk/modules/store/veterinary_medicine_screen.dart';
+import 'package:se7a_7alalk/modules/store/veterinary_supplies.dart';
 import 'package:se7a_7alalk/modules/user/settings_screen.dart';
+import 'package:se7a_7alalk/modules/user/support_message.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
-import 'change_password_screen.dart';
+import '../../user/change_password_screen.dart';
+import '../../user/my_offers_screen.dart';
 
 class MoreScreen extends StatelessWidget {
   static const String id = "MoreScreen";
   List<Map<String, String>> storeList = [
-    {"title": "أدوية بيطرية", "page": ""},
-    {"title": "التحصينات البيطرية", "page": ""},
-    {"title": "الأدوات والمستلزمات البيطرية", "page": ""},
-    {"title": "الاعلاف الحيوانية", "page": ""},
+    {"title": "أدوية بيطرية", "page": VeterinaryMedicine.id},
+    {"title": "التحصينات البيطرية", "page": VeterinaryFortifications.id},
+    {"title": "الأدوات والمستلزمات البيطرية", "page": VeterinarySupplies.id},
+    {"title": "الاعلاف الحيوانية", "page": SellingAnimalFeed.id},
   ];
   List<Map<String, String>> veterinaryServicesList = [
     {"title": "خدمات الرش والتخلص من الحشرات الخارجية للحيوانات", "page": ""},
@@ -44,7 +55,7 @@ class MoreScreen extends StatelessWidget {
     {"title": "مكافئاتي", "page": RewardsScreen.id},
     {"title": "طلباتي", "page": ""},
     {"title": "تغيير كلمة المرور", "page": ChangePasswordScreen.id},
-    {"title": "اعدادات التنبيهات", "page": ""},
+    {"title": "اعدادات التنبيهات", "page": NotificationSettings.id},
   ];
 
   @override
@@ -127,11 +138,17 @@ class MoreScreen extends StatelessWidget {
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title: "العيادات البيطرية التخصصية",
-                      onPressed: () {}),
+                      onPressed: () {
+                        navigateTo(
+                            context: context,
+                            page: ReservationOfSpecialtyClinics.id);
+                      }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title: "العيادات البيطرية ( حسب المكان)",
-                      onPressed: () {}),
+                      onPressed: () {
+                        navigateTo(context: context, page: Clinics.id);
+                      }),
                   buildExpansionTile(
                       isCollapsed: isCollapsed,
                       title: "الاستشارات البيطرية",
@@ -158,7 +175,9 @@ class MoreScreen extends StatelessWidget {
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title: "عروض خاصة",
-                      onPressed: () {}),
+                      onPressed: () {
+                        navigateTo(context: context, page: MyOffersScreen.id);
+                      }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title: "الاعدادات",
@@ -168,7 +187,9 @@ class MoreScreen extends StatelessWidget {
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title: "الدعم الفني",
-                      onPressed: () {}),
+                      onPressed: () {
+                        navigateTo(context: context, page: CustomerSupport.id);
+                      }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title: "عن التطبيق",
@@ -178,7 +199,10 @@ class MoreScreen extends StatelessWidget {
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title: "الأسئلة الشائعة",
-                      onPressed: () {}),
+                      onPressed: () {
+                        navigateTo(
+                            context: context, page: QuestionsAndAnswers.id);
+                      }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title: "خروج",
