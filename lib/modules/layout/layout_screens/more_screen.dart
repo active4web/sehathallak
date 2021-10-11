@@ -180,7 +180,8 @@ class MoreScreen extends StatelessWidget {
                       icon: CupertinoIcons.shopping_cart,
                       title: "specialOffers".tr(),
                       onPressed: () {
-                        navigateTo(context: context, page: MyOffersScreen.id);
+                        navigateTo(
+                            context: context, page: SpecialOffersScreen.id);
                       }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,

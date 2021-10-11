@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
@@ -19,18 +20,18 @@ class CompletedOrder extends StatelessWidget {
               height: 30,
             ),
             Text(
-              "اكتمل طلبك بنجاح",
+              "orderCompletedSuccessfully".tr(),
               style: TextStyle(fontSize: 22),
             ),
             Text(
-              "رقم الطلب1893# ",
+              "${"order".tr()}1893# ",
               style: TextStyle(fontSize: 22),
             ),
             SizedBox(
               height: 30,
             ),
             customButton(
-                text: "تفاصيل الطلب",
+                text: "orderDetails".tr(),
                 onPressed: () {
                   navigateTo(context: context, page: OrderDetails.id);
                 }),
@@ -39,7 +40,7 @@ class CompletedOrder extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  "العودة للرئيسية",
+                  "backToHome".tr(),
                   style: TextStyle(fontSize: 22, color: Colors.black),
                 ))
           ],

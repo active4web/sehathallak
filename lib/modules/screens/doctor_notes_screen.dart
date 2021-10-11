@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:se7a_7alalk/modules/screens/product_screen.dart';
@@ -12,12 +13,12 @@ class DoctorNotesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        title: "ملاحظات الطبيب ",
+        title: "doctorNotes".tr(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("ملاحظات الطبيب "),
+          Text("doctorNotes".tr()),
           SizedBox(
             height: 30,
           ),
@@ -48,12 +49,12 @@ class DoctorNotesScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "تمت اضافه الادويه المطلوبه لعربه التسوق الخاصه بك ",
+                    "TheRequiredMedicationHasBeenAddedToYourShoppingCart".tr(),
                   ),
                   InkWell(
                       onTap: () {},
                       child: Text(
-                        "الانتقال الى عربة التسوق",
+                        "GoToCart".tr(),
                         style: TextStyle(color: Colors.red),
                       ))
                 ],
@@ -75,7 +76,7 @@ class DoctorNotesScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
-              "موصى بها",
+              "recommended".tr(),
               style: TextStyle(fontSize: 14),
             ),
           ),
@@ -154,7 +155,7 @@ class DoctorNotesScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       color: kAppColor,
                       child: Text(
-                        "اضف للسلة",
+                        "addToCart".tr(),
                         style: TextStyle(color: Colors.white, fontSize: 9),
                       ),
                     )

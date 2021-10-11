@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/modules/screens/add_review_screen.dart';
 import 'package:se7a_7alalk/modules/user/support_message.dart';
@@ -9,7 +10,7 @@ class CustomerSupport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "خدمة العملاء", context: context),
+      appBar: customAppBar(title: "customerSupport".tr(), context: context),
       body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -17,7 +18,7 @@ class CustomerSupport extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: customButton(
-                  text: "اطرح سؤالك",
+                  text: "addQuestion".tr(),
                   onPressed: () {
                     navigateTo(context: context, page: SupportMessage.id);
                   },

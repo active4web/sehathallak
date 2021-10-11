@@ -1,16 +1,16 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 
-class MyOffersScreen extends StatelessWidget {
-  static const String id = "myOffers";
-
+class SpecialOffersScreen extends StatelessWidget {
+  static const String id = "SpecialOffers";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        title: "عروض خاصة",
+        title: "specialOffers".tr(),
         actions: true,
       ),
       body: Column(
@@ -21,7 +21,7 @@ class MyOffersScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "عدد العروض(4)",
+                  "${"offersNumber".tr()}(4)",
                   style: TextStyle(color: kAppColor),
                 ),
                 IconButton(
@@ -105,7 +105,7 @@ class MyOffersScreen extends StatelessWidget {
                   color: kAppColor,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   child: Text(
-                    "اضف للسلة",
+                    "addToCart".tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 9),
                   ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 
@@ -16,7 +17,7 @@ class OrderDetails extends StatelessWidget {
               backgroundColor: Colors.transparent,
               elevation: 0,
               title: Text(
-                "تفاصيل الطلب",
+                "orderDetails".tr(),
                 style: TextStyle(color: Colors.black),
               ),
               leading: IconButton(
@@ -49,7 +50,7 @@ class OrderDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "الطلب",
+                            "order".tr(),
                             style: TextStyle(color: Colors.white, fontSize: 17),
                           ),
                           Text(
@@ -84,14 +85,14 @@ class OrderDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "تفاصيل الطلب",
+                        "orderDetails".tr(),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "السعر",
+                            "price".tr(),
                           ),
                           Text("240 ريال",
                               style: TextStyle(
@@ -103,7 +104,7 @@ class OrderDetails extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "قسيمة الخصم",
+                            "discount".tr(),
                           ),
                           Text("240 ريال",
                               style: TextStyle(
@@ -120,7 +121,7 @@ class OrderDetails extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("طريقة الدفع"),
+                      Text("paymentMethod".tr()),
                       Row(
                         children: [
                           Image.asset("assets/images/card icon.png"),
@@ -141,7 +142,7 @@ class OrderDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "العنوان",
+                        "address".tr(),
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -156,7 +157,7 @@ class OrderDetails extends StatelessWidget {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "الاجمالي",
+                    "total".tr(),
                     style: TextStyle(fontSize: 14),
                   ),
                 ),

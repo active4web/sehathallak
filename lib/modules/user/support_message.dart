@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/shared/components/custom_text_field.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
@@ -12,40 +13,40 @@ class SupportMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "الدعم الفني", context: context),
+      appBar: customAppBar(title: "technicalSupport".tr(), context: context),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
           children: [
             CustomTextField(
-              hintText: 'الاسم الكامل',
+              hintText: 'fullName'.tr(),
               controller: name,
             ),
             CustomTextField(
-              hintText: 'البريد الالكتروني',
+              hintText: 'emailAddress'.tr(),
               controller: email,
             ),
             CustomTextField(
-              hintText: 'رقم الطلب',
+              hintText: 'orderNumber'.tr(),
               controller: offerNumber,
             ),
             CustomTextField(
-              hintText: 'موضوع',
+              hintText: 'subject'.tr(),
               controller: subject,
             ),
             CustomTextField(
-              hintText: 'رسالة',
+              hintText: 'message'.tr(),
               maxLines: 4,
               controller: message,
             ),
             buildImageContainer(
                 onPressed: () {},
-                title: "ارفاق ملفات",
+                title: "attachFile".tr(),
                 icon: Icons.attach_file),
             Padding(
               padding: const EdgeInsets.all(20),
               child: customButton(
-                text: "اضف تقييمك",
+                text: "addAReview".tr(),
                 onPressed: () {},
               ),
             )

@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
@@ -13,7 +14,7 @@ class AboutAppScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
-          'عن التطبيق',
+          'aboutApp'.tr(),
           style: TextStyle(
             color: Colors.white,
           ),
@@ -65,7 +66,7 @@ class AboutAppScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'عن التطبيق',
+                          'aboutApp'.tr(),
                           style: TextStyle(
                               color: kAppColor,
                               fontSize: 17,

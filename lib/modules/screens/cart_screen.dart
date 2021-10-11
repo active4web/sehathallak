@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:se7a_7alalk/modules/screens/payment_screen.dart';
@@ -20,7 +21,7 @@ class CartScreen extends StatelessWidget {
             tileColor: kAppSecondColor,
             leading: Text("2", style: TextStyle(color: Colors.white)),
             title: Text(
-              "عنصر لديك في السله",
+              "itemsInTheCart".tr(),
               style: TextStyle(color: Colors.white),
             ),
             trailing: Icon(
@@ -47,7 +48,7 @@ class CartScreen extends StatelessWidget {
                 controller: discountController,
                 decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: "الرمز التروجي",
+                    hintText: "promoCode".tr(),
                     suffixIcon: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -55,7 +56,7 @@ class CartScreen extends StatelessWidget {
                       ),
                       child: Center(
                           child: Text(
-                        "تطبيق",
+                        "Apply".tr(),
                         style: TextStyle(color: Colors.white),
                       )),
                       width: 100,
@@ -70,12 +71,12 @@ class CartScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("تفاصيل الطلب"),
+                Text("orderDetails".tr()),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "السعر",
+                      "price".tr(),
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text("240 ريال",
@@ -87,7 +88,7 @@ class CartScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "قسيمة الخصم",
+                      "discount".tr(),
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text("240 ريال",
@@ -117,7 +118,7 @@ class CartScreen extends StatelessWidget {
                           onChanged: (value) {},
                         ),
                         Text(
-                          "ارغب باستخدام رصيد مكافئاتي",
+                          "IWantToUseMyRewardBalance".tr(),
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -134,7 +135,7 @@ class CartScreen extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "العنوان",
+            "address".tr(),
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           Row(
@@ -151,7 +152,7 @@ class CartScreen extends StatelessWidget {
                       controller: discountController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "المدينة",
+                        hintText: "city".tr(),
                         suffixIcon: Icon(Icons.arrow_drop_down),
                       ),
                     )),
@@ -169,7 +170,7 @@ class CartScreen extends StatelessWidget {
                       controller: phoneNumberController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "رقم الجوال",
+                        hintText: "phoneNumber".tr(),
                       ),
                     )),
               ),
@@ -186,7 +187,7 @@ class CartScreen extends StatelessWidget {
                 controller: addressController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "العنوان بالتفصيل",
+                  hintText: "addressDetails".tr(),
                 ),
               )),
           Row(
@@ -195,7 +196,7 @@ class CartScreen extends StatelessWidget {
                 value: false,
                 onChanged: (value) {},
               ),
-              Text("حفظ العنوان")
+              Text("saveAddress".tr())
             ],
           ),
           IntrinsicHeight(
@@ -209,7 +210,7 @@ class CartScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "الاجمالي 120.00 ريال",
+                    "${"total".tr()} 120.00 ريال",
                     style: TextStyle(
                         color: kAppSecondColor,
                         fontSize: 15,
@@ -222,7 +223,7 @@ class CartScreen extends StatelessWidget {
                       onPressed: () {
                         navigateTo(context: context, page: PaymentScreen.id);
                       },
-                      text: "الدفع"),
+                      text: "pay".tr()),
                 ],
               ),
             ),

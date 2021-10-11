@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
@@ -18,7 +19,7 @@ class CountriesScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "حدد الدولة",
+                "chooseCountry".tr(),
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -42,9 +43,9 @@ class CountriesScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              customDropDownMenu(labelText: "الدولة", value: country),
+              customDropDownMenu(labelText: "country".tr(), value: country),
               Text(
-                "اللغة",
+                "language".tr(),
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -67,7 +68,7 @@ class CountriesScreen extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                child: customButton(text: "حفظ", onPressed: () {}),
+                child: customButton(text: "save".tr(), onPressed: () {}),
               ),
             ],
           ),

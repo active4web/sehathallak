@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
@@ -16,7 +17,7 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: GradientAppBar(
-          title: "الدفع",
+          title: "pay".tr(),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
@@ -38,15 +39,13 @@ class PaymentScreen extends StatelessWidget {
                       color: Colors.black,
                       height: 20,
                     ),
-                    Text("الدفع عند الاستلام"),
+                    Text("payCash".tr()),
                     Spacer(),
                     Radio(
                       value: "cash",
                       groupValue: paymentRadioValue,
                       onChanged: (value) {
                         paymentRadioValue = value;
-                        print(paymentRadioValue);
-                        print(value);
                       },
                     )
                   ],
@@ -74,25 +73,23 @@ class PaymentScreen extends StatelessWidget {
                           thickness: 10,
                           color: Colors.red,
                         ),
-                        Text("فيزا/ كريديت كارد"),
+                        Text("Visa/CreditCard".tr()),
                         Spacer(),
                         Radio(
                           value: "visa",
                           groupValue: paymentRadioValue,
                           onChanged: (value) {
                             paymentRadioValue = value;
-                            print(paymentRadioValue);
-                            print(value);
                           },
                         )
                       ],
                     ),
                     Divider(),
-                    visaAndCreditField(
-                        "رقم البطاقة", cardNumberController, "11 22 33 44 55 ",
+                    visaAndCreditField("cardNumber".tr(), cardNumberController,
+                        "11 22 33 44 55 ",
                         showPrefix: true),
-                    visaAndCreditField("الاسم على البطاقة",
-                        cardNumberController, "Mohamd Ahed",
+                    visaAndCreditField(
+                        "nameOnCard".tr(), cardNumberController, "Mohamd Ahed",
                         showPrefix: false),
                     SizedBox(
                       height: 10,
@@ -109,7 +106,7 @@ class PaymentScreen extends StatelessWidget {
                           width: 10,
                         ),
                         Expanded(
-                          child: visaAndCreditField("تاريخ الصلاحية",
+                          child: visaAndCreditField("expirationDate".tr(),
                               expiryDateController, "20/03/2022",
                               showSuffix: true,
                               icon: Icon(Icons.calendar_today)),
@@ -123,7 +120,7 @@ class PaymentScreen extends StatelessWidget {
                 height: 20,
               ),
               customButton(
-                  text: "إتمام الدفع",
+                  text: "completePayment".tr(),
                   onPressed: () {
                     navigateTo(context: context, page: CompletedOrder.id);
                   })
