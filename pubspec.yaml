@@ -39,9 +39,11 @@ dependencies:
   carousel_slider:
   shared_preferences:
   dio:
-  flutter_localizations:
-    sdk: flutter
-  intl: ^0.17.0
+  easy_localization: ^3.0.0
+  bubble_tab_indicator: ^0.1.6
+  syncfusion_flutter_sliders: ^19.2.62
+
+
 
 
 
@@ -74,8 +76,12 @@ flutter:
   generate: true
 
   # To add assets to your application, add an assets section, like this:
+
+
   assets:
     - assets/images/
+    - assets/language/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

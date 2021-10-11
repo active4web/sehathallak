@@ -7,12 +7,14 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool actions;
   final bool haveNotification;
+  final bool canNavigate;
   final bool haveCart;
   GradientAppBar(
       {this.title,
       this.actions = false,
       this.haveNotification = false,
-      this.haveCart = false});
+      this.haveCart = false,
+      this.canNavigate: true});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: CustomArrowBack(),
+        leading: canNavigate ? CustomArrowBack() : SizedBox(),
         actions: actions
             ? [
                 Container(

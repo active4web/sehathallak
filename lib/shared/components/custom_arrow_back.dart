@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:se7a_7alalk/shared/widgets/components.dart';
 
 class CustomArrowBack extends StatelessWidget {
-  const CustomArrowBack({
-    Key key,
-  }) : super(key: key);
+  const CustomArrowBack({final IconData icon});
 
   @override
   Widget build(BuildContext context) {

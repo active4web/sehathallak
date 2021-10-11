@@ -1,6 +1,8 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -9,7 +11,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "الملف الشخصي"),
+      appBar: GradientAppBar(
+        title: "Profile".tr(),
+        canNavigate: false,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -30,29 +35,29 @@ class ProfileScreen extends StatelessWidget {
                 height: 10,
               ),
               customTextField(
-                  labelText: "اسم المستخدم",
+                  labelText: "userName".tr(),
                   hintText: "Moha123456",
                   keyboardType: TextInputType.name,
                   prefixIcon: CupertinoIcons.person),
               customTextField(
-                  labelText: "البريد الالكتروني",
+                  labelText: "emailAddress".tr(),
                   hintText: "Moha@testmail.com",
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: CupertinoIcons.mail),
               customTextField(
-                  labelText: "الدولة",
+                  labelText: "country".tr(),
                   keyboardType: TextInputType.name,
-                  hintText: "حدد الدولة",
+                  hintText: "chooseCountry".tr(),
                   suffixIcon: Icon(Icons.keyboard_arrow_down),
                   prefixIcon: CupertinoIcons.location),
               customTextField(
-                  labelText: "المدينة",
-                  hintText: "حدد المدينه",
+                  labelText: "city".tr(),
+                  hintText: "chooseCity".tr(),
                   keyboardType: TextInputType.name,
                   suffixIcon: Icon(Icons.keyboard_arrow_down),
                   prefixIcon: CupertinoIcons.location),
               customTextField(
-                  labelText: "رقم الجوال",
+                  labelText: "phoneNumber".tr(),
                   keyboardType: TextInputType.phone,
                   suffixIcon: CountryCodePicker(
                     favorite: ['+971', 'FR'],
@@ -60,19 +65,19 @@ class ProfileScreen extends StatelessWidget {
                   hintText: "1234567889",
                   prefixIcon: CupertinoIcons.phone),
               customTextField(
-                  labelText: "كلمة المرور",
+                  labelText: "password".tr(),
                   isPassword: true,
                   hintText: "***************",
                   prefixIcon: CupertinoIcons.lock),
               customTextField(
-                  labelText: "تأكيد كلمة المرور",
+                  labelText: "confirmPassword".tr(),
                   isPassword: true,
                   hintText: "***************",
                   prefixIcon: CupertinoIcons.lock),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                child: customButton(text: "حفظ", onPressed: () {}),
+                child: customButton(text: "save".tr(), onPressed: () {}),
               ),
             ],
           ),

@@ -49,8 +49,77 @@ Widget customButton(
       ),
     );
 
-Future navigateTo({BuildContext context, String page}) =>
-    Navigator.pushNamed(context, page);
+Future navigateTo({BuildContext context, String page, Object arguments}) =>
+    Navigator.pushNamed(context, page, arguments: arguments);
+
+Future<dynamic> buildSuccessDialog(context) {
+  return showDialog(
+    context: context,
+    builder: (context) => Dialog(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Align(
+                alignment: Alignment.topLeft,
+                child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset("assets/images/close icon.png"))),
+            Image.asset("assets/images/dialog image.png"),
+            Text("تم ارسال طلبك بنجاح"),
+            Text("انت مشترك بالباقة السنويه")
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Future<dynamic> buildPayServiceDialog(context) {
+  return showDialog(
+    context: context,
+    builder: (context) => Dialog(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Align(
+                alignment: Alignment.topLeft,
+                child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset("assets/images/close icon.png"))),
+            Image.asset("assets/images/pay service.png"),
+            Text("قيمة الخدمة 500 ريال"),
+            Text("انت لست مشترك باحدى باقاتنا\nستنتقل الى شاشة الدفع"),
+            customButton(text: "إتمام الدفع", onPressed: () {}),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+              width: double.infinity,
+              height: 50,
+              decoration: BoxDecoration(
+                border: Border.all(color: kAppColor),
+              ),
+              child: Center(
+                child: Text(
+                  "الاشتراك بالباقات",
+                  style: TextStyle(color: kAppColor),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
+  );
+}
 
 Future navigateToAndStop({BuildContext context, String page}) =>
     Navigator.pushNamedAndRemoveUntil(context, page, (route) => false);

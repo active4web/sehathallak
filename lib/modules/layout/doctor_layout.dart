@@ -2,12 +2,13 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/cubit/app_cubit.dart';
 import 'package:se7a_7alalk/shared/cubit/app_states.dart';
 
-class HomeLayout extends StatelessWidget {
-  static const String id = "homeLayout";
-  HomeLayout({this.selectedIndex});
+class DoctorLayout extends StatelessWidget {
+  static const String id = "DoctorLayout";
+  DoctorLayout({this.selectedIndex});
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,8 @@ class HomeLayout extends StatelessWidget {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             body: IndexedStack(
-              children: cubit.homeScreens,
-              index: cubit.selectedHomeIndex,
+              children: cubit.doctorScreens,
+              index: cubit.selectedDoctorIndex,
             ),
             bottomNavigationBar: Container(
               decoration: BoxDecoration(
@@ -38,36 +39,30 @@ class HomeLayout extends StatelessWidget {
                   height: 70,
                   child: BottomNavigationBar(
                     backgroundColor: Colors.white,
-                    currentIndex: cubit.selectedHomeIndex,
+                    currentIndex: cubit.selectedDoctorIndex,
                     type: BottomNavigationBarType.fixed,
+                    selectedIconTheme: IconThemeData(color: kAppSecondColor),
+                    selectedItemColor: kAppSecondColor,
                     onTap: (value) {
-                      cubit.changeHomeNavBar(value);
+                      cubit.changeDoctorNavBar(value);
                     },
                     elevation: 30,
                     unselectedFontSize: 13,
                     selectedFontSize: 13,
                     items: [
                       BottomNavigationBarItem(
-                        icon: Icon(Icons.home_filled),
-                        label: "NavigatorHome".tr(),
+                        icon: Image.asset("assets/images/chat.png"),
+                        label: "TalksAndConsultations".tr(),
                       ),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.healing),
-                          label: 'NavigatorImmunization'.tr()),
+                          icon: Image.asset("assets/images/order.png"),
+                          label: 'Orders'.tr()),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.volunteer_activism),
-                          label: 'NavigatorMedicine'.tr()),
+                          icon: Image.asset("assets/images/user.png"),
+                          label: 'Profile'.tr()),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.medical_services),
-                          label: 'NavigatorServices'.tr()),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.access_time),
-                        label: 'NavigatorClinicBooking'.tr(),
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.menu),
-                        label: 'NavigatorMore'.tr(),
-                      ),
+                          icon: Image.asset("assets/images/exit.png"),
+                          label: 'Exit'.tr()),
                     ],
                   ),
                 ),

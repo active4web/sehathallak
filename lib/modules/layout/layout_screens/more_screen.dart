@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/modules/forms/Book_a_vaccination_appointment_screen.dart';
@@ -8,6 +9,7 @@ import 'package:se7a_7alalk/modules/screens/clinics.dart';
 import 'package:se7a_7alalk/modules/screens/reservation_of_specialty_clinics.dart';
 import 'package:se7a_7alalk/modules/user/about_app.dart';
 import 'package:se7a_7alalk/modules/user/customer_support.dart';
+import 'package:se7a_7alalk/modules/user/my_orders_screen.dart';
 import 'package:se7a_7alalk/modules/user/notification_settings.dart';
 import 'package:se7a_7alalk/modules/user/questions_and_answers.dart';
 import 'package:se7a_7alalk/modules/user/rewards_screen.dart';
@@ -16,10 +18,8 @@ import 'package:se7a_7alalk/modules/store/veterinary_fortifications.dart';
 import 'package:se7a_7alalk/modules/store/veterinary_medicine_screen.dart';
 import 'package:se7a_7alalk/modules/store/veterinary_supplies.dart';
 import 'package:se7a_7alalk/modules/user/settings_screen.dart';
-import 'package:se7a_7alalk/modules/user/support_message.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
-
 import '../../user/change_password_screen.dart';
 import '../../user/my_offers_screen.dart';
 
@@ -53,7 +53,7 @@ class MoreScreen extends StatelessWidget {
   ];
   List<Map<String, String>> myDataList = [
     {"title": "مكافئاتي", "page": RewardsScreen.id},
-    {"title": "طلباتي", "page": ""},
+    {"title": "طلباتي", "page": MyOrdersScreen.id},
     {"title": "تغيير كلمة المرور", "page": ChangePasswordScreen.id},
     {"title": "اعدادات التنبيهات", "page": NotificationSettings.id},
   ];
@@ -84,7 +84,7 @@ class MoreScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 22),
                       ),
                       Text(
-                        "رقم العميل : 12333",
+                        "${"clientNumber".tr()} : 12333",
                         style: TextStyle(fontSize: 14),
                       ),
                       Text(
@@ -98,14 +98,14 @@ class MoreScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "من : 1-7-2020",
+                            "${"from".tr()} : 1-7-2020",
                             style: TextStyle(
                                 fontSize: 11,
                                 color: Color(0xffED6B27),
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "الى : 1-7-2021",
+                            "${"to".tr()} : 1-7-2021",
                             style: TextStyle(
                                 fontSize: 11,
                                 color: Color(0xffED6B27),
@@ -127,17 +127,17 @@ class MoreScreen extends StatelessWidget {
                 children: [
                   buildExpansionTile(
                       isCollapsed: isCollapsed,
-                      title: "المتجر",
+                      title: "store".tr(),
                       icon: CupertinoIcons.shopping_cart,
                       model: storeList),
                   buildExpansionTile(
                       isCollapsed: isCollapsed,
-                      title: "الخدمات البيطرية",
+                      title: "veterinaryServices".tr(),
                       icon: CupertinoIcons.shopping_cart,
                       model: veterinaryServicesList),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
-                      title: "العيادات البيطرية التخصصية",
+                      title: "specializedVeterinaryClinics".tr(),
                       onPressed: () {
                         navigateTo(
                             context: context,
@@ -145,67 +145,71 @@ class MoreScreen extends StatelessWidget {
                       }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
-                      title: "العيادات البيطرية ( حسب المكان)",
+                      title: "VeterinaryClinics(accordingToLocation)".tr(),
                       onPressed: () {
                         navigateTo(context: context, page: Clinics.id);
                       }),
                   buildExpansionTile(
                       isCollapsed: isCollapsed,
-                      title: "الاستشارات البيطرية",
+                      title: "VeterinaryConsultation".tr(),
                       icon: CupertinoIcons.shopping_cart,
                       model: veterinaryConsultationList),
                   buildExpansionTile(
                       isCollapsed: isCollapsed,
-                      title: "حجز مواعيد العلاج والتحصين والتحاليل المخبرية",
+                      title:
+                          "BookAppointmentsForTreatment,ImmunizationAndLaboratoryTests"
+                              .tr(),
                       icon: CupertinoIcons.shopping_cart,
                       model: appointmentsBookingList),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title:
-                          "الاشتراك في باقات المتابعة الشهرية للحيوانات بالمزارع والعزب "),
+                          "SubscriptionToTheMonthlyFollow-upPackagesForAnimalsInFarmsAndRanches"
+                              .tr()),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
                       title:
-                          "الاشتراك في باقات الاستشارات البيطرية الكتابية والفيديو"),
+                          "SubscribeToWrittenAndVideoVeterinaryConsultationPackages"
+                              .tr()),
                   buildExpansionTile(
                       isCollapsed: isCollapsed,
-                      title: "بياناتي",
+                      title: "myData".tr(),
                       icon: CupertinoIcons.shopping_cart,
                       model: myDataList),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
-                      title: "عروض خاصة",
+                      title: "specialOffers".tr(),
                       onPressed: () {
                         navigateTo(context: context, page: MyOffersScreen.id);
                       }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
-                      title: "الاعدادات",
+                      title: "settings".tr(),
                       onPressed: () {
                         navigateTo(context: context, page: SettingsScreen.id);
                       }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
-                      title: "الدعم الفني",
+                      title: "technicalSupport".tr(),
                       onPressed: () {
                         navigateTo(context: context, page: CustomerSupport.id);
                       }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
-                      title: "عن التطبيق",
+                      title: "aboutApp".tr(),
                       onPressed: () {
                         navigateTo(context: context, page: AboutAppScreen.id);
                       }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
-                      title: "الأسئلة الشائعة",
+                      title: "commonQuestions".tr(),
                       onPressed: () {
                         navigateTo(
                             context: context, page: QuestionsAndAnswers.id);
                       }),
                   buildListTile(
                       icon: CupertinoIcons.shopping_cart,
-                      title: "خروج",
+                      title: "Exit".tr(),
                       onPressed: () {}),
                 ],
               ),
