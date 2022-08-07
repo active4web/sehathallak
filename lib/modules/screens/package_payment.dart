@@ -1,4 +1,6 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:se7a_7alalk/cubits/home_cubit/app_cubit.dart';
 import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
@@ -6,16 +8,19 @@ import 'package:se7a_7alalk/shared/widgets/components.dart';
 import 'completed_order.dart';
 
 class PackagePaymentScreen extends StatelessWidget {
-  static const String id = "PackagePaymentScreen";
+  final int packageId;
+  final dynamic packagePrice;
   var cardNumberController = TextEditingController();
   var cardNameController = TextEditingController();
   var cvcController = TextEditingController();
   var expiryDateController = TextEditingController();
+
+  PackagePaymentScreen({Key key, this.packageId, this.packagePrice}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: GradientAppBar(
-          title: "الدفع",
+          title: "pay".tr(),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
@@ -31,11 +36,11 @@ class PackagePaymentScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "قيمة الطلب",
+                      "orderPrice".tr(),
                       style: TextStyle(color: kAppColor),
                     ),
                     Text(
-                      "5000 ريال",
+                      packagePrice.toString(),
                       style: TextStyle(color: kAppColor),
                     ),
                   ],
@@ -53,11 +58,11 @@ class PackagePaymentScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    visaAndCreditField(
-                        "رقم البطاقة", cardNumberController, "11 22 33 44 55 ",
+                    visaAndCreditField("cardNumber".tr(), cardNumberController,
+                        "11 22 33 44 55 ",
                         showPrefix: true),
-                    visaAndCreditField("الاسم على البطاقة",
-                        cardNumberController, "Mohamd Ahed",
+                    visaAndCreditField(
+                        "nameOnCard".tr(), cardNameController, "Mohamd Ahed",
                         showPrefix: false),
                     SizedBox(
                       height: 10,
@@ -74,7 +79,7 @@ class PackagePaymentScreen extends StatelessWidget {
                           width: 10,
                         ),
                         Expanded(
-                          child: visaAndCreditField("تاريخ الصلاحية",
+                          child: visaAndCreditField("expirationDate".tr(),
                               expiryDateController, "20/03/2022",
                               showSuffix: true,
                               icon: Icon(Icons.calendar_today)),
@@ -88,10 +93,15 @@ class PackagePaymentScreen extends StatelessWidget {
                 height: 20,
               ),
               customButton(
-                  text: "إتمام الدفع",
-                  onPressed: () {
-                    buildSuccessDialog(context);
-                    // buildPayServiceDialog(context);
+                  text: "completePayment".tr(),
+                  onPressed: () async {
+                    var result =  await AppCubit.get(context).subscribeToPackage(packageId, 1);
+                    if(result["status"]) {
+                      buildSuccessDialog(
+                        context: context, msg:
+                        result["msg"]
+                      );
+                    }
                   })
             ],
           ),

@@ -13,12 +13,12 @@ class CustomDropDownMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return InputDecorator(
       decoration: InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-          constraints: BoxConstraints(maxHeight: 61)),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
             value: value,
-            isDense: true,
             hint: Text(
               hintText,
               style: TextStyle(fontSize: 12, color: kGreyColor),

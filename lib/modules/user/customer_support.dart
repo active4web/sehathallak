@@ -1,57 +1,74 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:se7a_7alalk/modules/screens/add_review_screen.dart';
+import 'package:se7a_7alalk/cubits/home_cubit/app_cubit.dart';
+import 'package:se7a_7alalk/model/q_and_a_model.dart';
 import 'package:se7a_7alalk/modules/user/support_message.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
 class CustomerSupport extends StatelessWidget {
-  static const String id = "CustomerSupport";
+  static const String id = "/CustomerSupport";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: "customerSupport".tr(), context: context),
-      body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: customButton(
-                  text: "addQuestion".tr(),
-                  onPressed: () {
-                    navigateTo(context: context, page: SupportMessage.id);
-                  },
-                ),
-              ),
-              Expanded(
-                child: ListView.separated(
-                    itemBuilder: (context, index) => buildExpansionTile(),
-                    separatorBuilder: (context, index) => SizedBox(
-                          height: 10,
+        appBar: customAppBar(title: "customerSupport".tr(), context: context),
+        body: FutureBuilder<QAndAModel>(
+          future: AppCubit.get(context).getAllSupportQuestions(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: customButton(
+                          text: "addQuestion".tr(),
+                          onPressed: () {
+                            navigateTo(
+                                context: context, page: SupportMessage());
+                          },
                         ),
-                    itemCount: 5),
-              )
-            ],
-          )),
-    );
+                      ),
+                      Expanded(
+                        child: ListView.separated(
+                            itemBuilder: (context, index) {
+                              if (snapshot.data.faqs.length > 0) {
+                                return buildExpansionTile(
+                                    snapshot: snapshot, index: index);
+                              } else {
+                                return Center(
+                                  child: Text("noQuestions".tr()),
+                                );
+                              }
+                            },
+                            separatorBuilder: (context, index) => SizedBox(
+                                  height: 10,
+                                ),
+                            itemCount: snapshot.data.faqs.length),
+                      )
+                    ],
+                  ));
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return Center(child: Text("noInternetConnection".tr()));
+            }
+          },
+        ));
   }
 
-  StatefulBuilder buildExpansionTile({
-    String title,
-    IconData icon,
-    List<Map<String, String>> model,
-  }) {
+  StatefulBuilder buildExpansionTile(
+      {AsyncSnapshot<QAndAModel> snapshot, index}) {
     return StatefulBuilder(
       builder: (context, setState) => ExpansionTile(
         title: Text(
-          "كيف احصل على مكافئات",
+          snapshot.data.faqs[index].question,
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
         ),
-        children: [
-          Text(
-              "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف")
-        ],
+        children: [Text(snapshot.data.faqs[index].answer)],
       ),
     );
   }

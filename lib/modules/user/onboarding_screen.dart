@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:se7a_7alalk/modules/user/login_screen.dart';
+import 'package:se7a_7alalk/modules/auth_screens/auth_screen.dart';
+import 'package:se7a_7alalk/modules/auth_screens/email_login_screen.dart';
 import 'package:se7a_7alalk/networks/local/cache_helper.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatelessWidget {
-  static const String id = "onBoarding";
+  static const String id = "/onBoarding";
   List<Map<String, String>> onBoardingList = [
     {
       "title": "صحة حلالك",
@@ -54,7 +55,7 @@ class OnBoardingScreen extends StatelessWidget {
                     onPressed: () {
                       CacheHelper.setData(key: "onBoard", value: true)
                           .then((value) {
-                        navigateTo(context: context, page: LoginScreen.id);
+                        navigateTo(context: context, page: AuthScreen());
                       });
                     },
                     text: "ابدأ",

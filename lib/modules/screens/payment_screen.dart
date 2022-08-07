@@ -7,7 +7,7 @@ import 'package:se7a_7alalk/shared/widgets/components.dart';
 import 'completed_order.dart';
 
 class PaymentScreen extends StatelessWidget {
-  static const String id = "PaymentScreen";
+  static const String id = "/PaymentScreen";
   var paymentRadioValue = "cash";
   var cardNumberController = TextEditingController();
   var cardNameController = TextEditingController();
@@ -89,7 +89,7 @@ class PaymentScreen extends StatelessWidget {
                         "11 22 33 44 55 ",
                         showPrefix: true),
                     visaAndCreditField(
-                        "nameOnCard".tr(), cardNumberController, "Mohamd Ahed",
+                        "nameOnCard".tr(), cardNameController, "Mohamd Ahed",
                         showPrefix: false),
                     SizedBox(
                       height: 10,
@@ -122,7 +122,7 @@ class PaymentScreen extends StatelessWidget {
               customButton(
                   text: "completePayment".tr(),
                   onPressed: () {
-                    navigateTo(context: context, page: CompletedOrder.id);
+                    navigateTo(context: context, page: CompletedOrder());
                   })
             ],
           ),

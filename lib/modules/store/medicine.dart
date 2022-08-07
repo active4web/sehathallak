@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
 
 class Medicine extends StatelessWidget {
-  static const String id = "Medicine";
+  static const String id = "/Medicine";
 
   @override
   Widget build(BuildContext context) {

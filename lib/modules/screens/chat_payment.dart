@@ -1,4 +1,6 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:se7a_7alalk/modules/screens/package_subscription_screen.dart';
 import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
@@ -6,7 +8,7 @@ import 'package:se7a_7alalk/shared/widgets/components.dart';
 import 'completed_order.dart';
 
 class ChatPayment extends StatelessWidget {
-  static const String id = "ChatPayment";
+  static const String id = "/ChatPayment";
   var cardNumberController = TextEditingController();
   var cardNameController = TextEditingController();
   var cvcController = TextEditingController();
@@ -15,7 +17,7 @@ class ChatPayment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: GradientAppBar(
-          title: "الدفع",
+          title: "pay".tr(),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
@@ -29,21 +31,25 @@ class ChatPayment extends StatelessWidget {
                     fontSize: 15),
               ),
               Text(
-                "قيمه الحصول على الاستشارة البيطريه 500 ريال لانك غير مشترك بباقتنا",
+                "${"theValueOfObtainingAVeterinaryConsultation".tr()} 500 ريال ${"BecauseYouAreNotSubscribedToOurPackage".tr()}",
                 style: TextStyle(color: kAppColor, fontSize: 15),
               ),
               Row(
                 children: [
                   Expanded(
                     child: Text(
-                      "يمكنك الاشتراك بأحد باقاتنا للحصول على خدمه الاستشارات بشكل مجاني",
+                      "youCanSubscribeToOneOfOurPackagesToGetAFreeConsultationService"
+                          .tr(),
                       style: TextStyle(color: kAppColor, fontSize: 15),
                     ),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        navigateTo(
+                            context: context, page: PackageSubscription());
+                      },
                       child: Text(
-                        "الاشتراك بالباقات",
+                        "subscribeToPackages".tr(),
                         style: TextStyle(color: Color(0xffFA6400)),
                       ))
                 ],
@@ -58,7 +64,7 @@ class ChatPayment extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "قيمة الطلب",
+                      "orderPrice".tr(),
                       style: TextStyle(color: kAppColor),
                     ),
                     Text(
@@ -80,11 +86,11 @@ class ChatPayment extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    visaAndCreditField(
-                        "رقم البطاقة", cardNumberController, "11 22 33 44 55 ",
+                    visaAndCreditField("cardNumber".tr(), cardNumberController,
+                        "11 22 33 44 55 ",
                         showPrefix: true),
-                    visaAndCreditField("الاسم على البطاقة",
-                        cardNumberController, "Mohamd Ahed",
+                    visaAndCreditField(
+                        "nameOnCard".tr(), cardNumberController, "Mohamd Ahed",
                         showPrefix: false),
                     SizedBox(
                       height: 10,
@@ -101,7 +107,7 @@ class ChatPayment extends StatelessWidget {
                           width: 10,
                         ),
                         Expanded(
-                          child: visaAndCreditField("تاريخ الصلاحية",
+                          child: visaAndCreditField("expirationDate".tr(),
                               expiryDateController, "20/03/2022",
                               showSuffix: true,
                               icon: Icon(Icons.calendar_today)),
@@ -115,9 +121,9 @@ class ChatPayment extends StatelessWidget {
                 height: 20,
               ),
               customButton(
-                  text: "إتمام الدفع",
+                  text: "completePayment".tr(),
                   onPressed: () {
-                    buildSuccessDialog(context);
+                    buildSuccessDialog(context: context);
                     // buildPayServiceDialog(context);
                   })
             ],

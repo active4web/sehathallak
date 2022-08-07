@@ -1,74 +1,95 @@
+
 import 'package:easy_localization/src/public_ext.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:se7a_7alalk/shared/constants.dart';
-import 'package:se7a_7alalk/shared/cubit/app_cubit.dart';
-import 'package:se7a_7alalk/shared/cubit/app_states.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:se7a_7alalk/cubits/auth_cubit/auth_cubit.dart';
+import 'package:se7a_7alalk/modules/account_screens/profile_screen.dart';
+import 'package:se7a_7alalk/modules/auth_screens/auth_screen.dart';
+import 'package:se7a_7alalk/shared/widgets/components.dart';
+
+import 'doctor_layout_screens/chat_screen.dart';
+import 'doctor_layout_screens/order_screen.dart';
+
 
 class DoctorLayout extends StatelessWidget {
-  static const String id = "DoctorLayout";
-  DoctorLayout({this.selectedIndex});
-  int selectedIndex = 0;
+  PersistentTabController _controller = PersistentTabController(initialIndex: 0);
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon:  Image.asset("assets/images/chat.png"),
+        inactiveIcon:  Image.asset("assets/images/chat.png"),
+        title: "TalksAndConsultations".tr(),
+      ),
+      PersistentBottomNavBarItem(
+          icon: Image.asset("assets/images/order.png"),
+          inactiveIcon: Image.asset("assets/images/order.png"),
+          title: 'orders'.tr()
+      ),
+      PersistentBottomNavBarItem(
+          icon: Image.asset("assets/images/user.png"),
+          inactiveIcon: Image.asset("assets/images/user.png"),
+          title: 'profile'.tr()
+      ),
+      PersistentBottomNavBarItem(
+          icon: Image.asset("assets/images/exit.png"),
+          inactiveIcon: Image.asset("assets/images/exit.png"),
+          title: 'Exit'.tr()
+      ),
+    ];
+  }
+
+  List<Widget> _homeScreens() {
+    return [
+      ChatsScreen(),
+      DoctorOrdersScreen(),
+      ProfileScreen(),
+      SizedBox(),
+    ];
+  }
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
-        listener: (context, AppStates state) {},
-        builder: (context, AppStates state) {
-          AppCubit cubit = AppCubit.get(context);
-          return Scaffold(
-            body: IndexedStack(
-              children: cubit.doctorScreens,
-              index: cubit.selectedDoctorIndex,
+    return  PersistentTabView(
+      context,
+      controller: _controller,
+      onItemSelected: (value) async{
+        if (value == 3) {
+          var result = await AuthCubit.get(context).logout();
+          showToast(text: result["msg"]);
+          Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return AuthScreen();
+              },
             ),
-            bottomNavigationBar: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 5,
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16.0),
-                  topRight: Radius.circular(16.0),
-                ),
-                child: Container(
-                  height: 70,
-                  child: BottomNavigationBar(
-                    backgroundColor: Colors.white,
-                    currentIndex: cubit.selectedDoctorIndex,
-                    type: BottomNavigationBarType.fixed,
-                    selectedIconTheme: IconThemeData(color: kAppSecondColor),
-                    selectedItemColor: kAppSecondColor,
-                    onTap: (value) {
-                      cubit.changeDoctorNavBar(value);
-                    },
-                    elevation: 30,
-                    unselectedFontSize: 13,
-                    selectedFontSize: 13,
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Image.asset("assets/images/chat.png"),
-                        label: "TalksAndConsultations".tr(),
-                      ),
-                      BottomNavigationBarItem(
-                          icon: Image.asset("assets/images/order.png"),
-                          label: 'Orders'.tr()),
-                      BottomNavigationBarItem(
-                          icon: Image.asset("assets/images/user.png"),
-                          label: 'Profile'.tr()),
-                      BottomNavigationBarItem(
-                          icon: Image.asset("assets/images/exit.png"),
-                          label: 'Exit'.tr()),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        });
+                (_) => false,);
+        }
+      },
+      screens: _homeScreens(),
+      items: _navBarsItems(),
+      confineInSafeArea: true,
+      backgroundColor: Colors.white, // Default is Colors.white.
+      handleAndroidBackButtonPress: true, // Default is true.
+      resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true, // Default is true.
+      hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.white,
+      ),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.all,
+      itemAnimationProperties: ItemAnimationProperties( // Navigation Bar's items animation properties.
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ),
+      screenTransitionAnimation: ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
+        animateTabTransition: true,
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarHeight: 80,
+      navBarStyle: NavBarStyle.style6, // Choose the nav bar style with this property.
+    );
   }
 }

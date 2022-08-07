@@ -33,15 +33,47 @@ dependencies:
   bloc: ^7.0.0
   flutter_bloc: ^7.0.0
   flutter_rating_bar: ^4.0.0
-  country_code_picker: ^2.0.2
+  country_pickers: ^2.0.0
   smooth_page_indicator: ^1.0.0+2
   flutter_native_splash:
-  carousel_slider:
+  carousel_pro: ^1.0.0
   shared_preferences:
   dio:
   easy_localization: ^3.0.0
   bubble_tab_indicator: ^0.1.6
   syncfusion_flutter_sliders: ^19.2.62
+  fluttertoast: ^8.0.8
+  agora_rtc_engine:
+  permission_handler: ^8.2.3
+  file_picker: ^4.2.0
+  image_picker: ^0.8.4+4
+  #location
+  google_maps_flutter: ^2.0.11
+  geocoding: ^2.0.1
+  location: ^4.2.0
+  url_launcher: ^6.0.12
+  font_awesome_flutter: ^9.2.0
+  #firebase
+  firebase_core: "^1.7.0"
+  firebase_messaging: "^10.0.8"
+  firebase_auth: ^1.0.1
+  google_sign_in: ^5.2.4
+  flutter_facebook_auth: ^4.0.1
+  carousel_slider: ^4.0.0
+  persistent_bottom_nav_bar: ^4.0.2
+  flutter_phoenix: ^1.0.0
+  youtube_player_flutter: ^8.0.0
+  flutter_share: ^2.0.0
+  sound_stream: ^0.3.0
+  dialogflow_grpc: ^0.2.9
+  rxdart: ^0.27.2
+  chat_bubbles: ^1.1.0
+
+
+
+
+
+
 
 
 
@@ -52,10 +84,19 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  cloud_firestore: ^3.1.10
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo.png"
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -79,6 +120,7 @@ flutter:
 
 
   assets:
+    - assets/
     - assets/images/
     - assets/language/
 

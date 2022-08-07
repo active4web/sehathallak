@@ -1,18 +1,29 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:se7a_7alalk/shared/components/custom_arrow_back.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:se7a_7alalk/cubits/store_cubit/store_cubit.dart';
+import 'package:se7a_7alalk/cubits/store_cubit/store_states.dart';
 import 'package:se7a_7alalk/shared/components/custom_text_field.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
 class AddReviewScreen extends StatelessWidget {
-  static const String id = "addReviewScreen";
-  final TextEditingController ratingLocation = TextEditingController();
-  final TextEditingController moreRating = TextEditingController();
+  final int productId;
+  final String productName;
+  final String productImage;
+  static const String id = "/addReviewScreen";
+  final TextEditingController ratingTitle = TextEditingController();
+  final TextEditingController ratingDesc = TextEditingController();
+  int starNumber;
+  XFile file;
+  AddReviewScreen({Key key, this.productId, this.productName, this.productImage}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: customAppBar(title: "إضافة تقييم", context: context),
+      appBar: customAppBar(title: "addReview".tr(), context: context),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
@@ -24,7 +35,7 @@ class AddReviewScreen extends StatelessWidget {
                   height: 100,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/product.png'))),
+                          image: NetworkImage(productImage))),
                 ),
                 SizedBox(
                   width: 20,
@@ -33,7 +44,7 @@ class AddReviewScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Product Name',
+                      productName,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                     ),
@@ -44,6 +55,7 @@ class AddReviewScreen extends StatelessWidget {
                         minRating: 1,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
+                        itemSize: 24,
                         itemCount: 5,
                         itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                         itemBuilder: (context, _) => Icon(
@@ -51,7 +63,8 @@ class AddReviewScreen extends StatelessWidget {
                           color: Colors.amber,
                         ),
                         onRatingUpdate: (rating) {
-                          print(rating);
+                          starNumber = rating.round();
+                          print(starNumber);
                         },
                       ),
                     )
@@ -63,26 +76,51 @@ class AddReviewScreen extends StatelessWidget {
               height: 30,
             ),
             CustomTextField(
-              hintText: 'عنوان التقييم',
-              controller: ratingLocation,
+              hintText: 'ratingTitle'.tr(),
+              controller: ratingTitle,
             ),
             SizedBox(
               height: 22,
             ),
             CustomTextField(
-              hintText: 'اخبرنا بالمزيد',
+              hintText: 'tellUsMore'.tr(),
               maxLines: 4,
-              controller: moreRating,
+              controller: ratingDesc,
             ),
-            buildImageContainer(
-                onPressed: () {},
-                title: "تحميل صورة",
-                icon: Icons.camera_alt_outlined),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: customButton(
-                text: 'اضف تقييمك',
-              ),
+            BlocConsumer<StoreCubit, StoreStates>(
+              builder: (context, state) {
+                return buildImageContainer(
+                    onPressed: () async {
+                      file = await StoreCubit.get(context).pickImage(file: file);
+                    },
+                    title: "uploadPhoto".tr(),
+                    icon: Icons.camera_alt_outlined);
+              },
+              listener: (context, state) {},
+            ),
+            BlocConsumer<StoreCubit, StoreStates>(
+              builder: (context, state) {
+                return state is! AddReviewLoadingState
+                    ? Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: customButton(
+                            text: 'addYourReview'.tr(),
+                            onPressed: () async {
+                              var result = await StoreCubit.get(context)
+                                  .addAReview(
+                                      productId: productId,
+                                      file: file,
+                                      ratingDesc: ratingDesc.text,
+                                      ratingTitle: ratingTitle.text,
+                                      starNum: starNumber);
+                              showToast(text: result["msg"]);
+                            }),
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      );
+              },
+              listener: (context, state) {},
             )
           ],
         ),

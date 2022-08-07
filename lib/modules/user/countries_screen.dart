@@ -4,7 +4,7 @@ import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
 class CountriesScreen extends StatelessWidget {
-  static const String id = "countriesScreen";
+  static const String id = "/countriesScreen";
   @override
   Widget build(BuildContext context) {
     String nationality;

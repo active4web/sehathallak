@@ -1,10 +1,14 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:se7a_7alalk/cubits/home_cubit/app_cubit.dart';
+import 'package:se7a_7alalk/cubits/home_cubit/app_states.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 
 class AboutAppScreen extends StatelessWidget {
-  static const String id = "AboutAppScreen";
+  static const String id = "/AboutAppScreen";
+  String aboutAppText;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,11 +78,19 @@ class AboutAppScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Container(
-                      child: Text(
-                        kAboutAppText,
-                        style: TextStyle(fontSize: 13, color: kAppColor),
-                      ),
+                    BlocBuilder<AppCubit, AppStates>(
+                      bloc: AppCubit()
+                        ..getAboutApp().then((value) {
+                          aboutAppText = value["about"][0]["body"];
+                        }),
+                      builder: (context, state) {
+                        return Container(
+                          child: Text(
+                            aboutAppText ?? "",
+                            style: TextStyle(fontSize: 13, color: kAppColor),
+                          ),
+                        );
+                      },
                     )
                   ],
                 ),

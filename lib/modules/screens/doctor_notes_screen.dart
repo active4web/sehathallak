@@ -7,7 +7,7 @@ import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
 class DoctorNotesScreen extends StatelessWidget {
-  static const String id = "DoctorNotesScreen";
+  static const String id = "/DoctorNotesScreen";
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,7 @@ class DoctorNotesScreen extends StatelessWidget {
         aspectRatio: 0.7,
         child: InkWell(
           onTap: () {
-            navigateTo(context: context, page: ProductScreen.id);
+            navigateTo(context: context, page: ProductScreen());
           },
           child: Stack(
             children: [

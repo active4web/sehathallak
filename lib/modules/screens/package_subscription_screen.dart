@@ -1,121 +1,175 @@
+import 'dart:math';
+
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:se7a_7alalk/cubits/home_cubit/app_cubit.dart';
+import 'package:se7a_7alalk/model/packageTypesModel.dart';
 import 'package:se7a_7alalk/modules/screens/package_payment.dart';
+import 'package:se7a_7alalk/networks/local/cache_helper.dart';
 import 'package:se7a_7alalk/shared/components/custom_dropdown_menu.dart';
 import 'package:se7a_7alalk/shared/components/custom_text_field.dart';
 import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
+import 'package:se7a_7alalk/shared/components/location_screen.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 import 'package:se7a_7alalk/shared/widgets/components.dart';
 
-class PackageSubscription extends StatelessWidget {
-  static const String id = "PackageSubscription";
-  final TextEditingController farmName = TextEditingController();
-  final TextEditingController phoneNumber = TextEditingController();
-  final TextEditingController accountNumber = TextEditingController();
-  final String animalType = "";
+class PackageSubscription extends StatefulWidget {
+  final List<Packages> packages ;
+  const PackageSubscription({Key key, this.packages}) : super(key: key);
+
+  @override
+  State<PackageSubscription> createState() => _PackageSubscriptionState();
+}
+
+class _PackageSubscriptionState extends State<PackageSubscription> {
+  final TextEditingController farmName =
+      TextEditingController(text: CacheHelper.getData("userName"));
+
+  final TextEditingController phoneNumber =
+      TextEditingController(text: CacheHelper.getData("userPhone"));
+
+  final TextEditingController accountNumber = TextEditingController(
+      text: CacheHelper.getData("userAccountNumber").toString());
+
+  int animalType;
+
   final TextEditingController animalsNumber = TextEditingController();
-  final String country = "";
-  final String packageSubscription = "";
+
+  int region;
+
+  int packageSubscription;
+
   final TextEditingController otherNotes = TextEditingController();
+
   final TextEditingController surgeryTime = TextEditingController();
-  final TextEditingController description = TextEditingController();
+
+  final TextEditingController address =
+      TextEditingController(text: CacheHelper.getData("userAddress"));
+  int currentIndex = 0;
+  double lat = 0;
+  double long = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(
-        title: "الاشتراك بالباقات",
+        title: "subscribeToPackages".tr(),
       ),
       body: ListView(
         padding: EdgeInsets.all(10),
         children: [
-          Text(
-            " نبذة عن الخدمة والمزايا التي سيتم تقديمها",
-            style: TextStyle(
-                color: kAppColor, fontSize: 15, fontWeight: FontWeight.bold),
-          ),
-          Container(
-              height: 80,
-              child: ListView.separated(
-                itemBuilder: (context, index) => buildItem(),
-                separatorBuilder: (context, index) => SizedBox(
-                  width: 10,
-                ),
-                itemCount: 5,
-                scrollDirection: Axis.horizontal,
-              )),
-          Text(
-            "الباقة الشهرية",
-            style: TextStyle(
-                color: kAppColor, fontSize: 15, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق",
-            style: TextStyle(
-              fontSize: 15,
-            ),
-          ),
-          Text(
-            "الاشتراك بالباقة",
-            style: TextStyle(
-                color: kAppColor, fontSize: 15, fontWeight: FontWeight.bold),
-          ),
           textFieldWithTitle(
-              title: "اسم صاحب المزرعة",
+              title: "farmOwnerName".tr(),
               hintText: "يتم كتابة الاسم تلقائي في حالة الاشتراك المسبق ",
               controller: farmName),
           textFieldWithTitle(
-              title: "رقم الموبيل",
+              title: "phoneNumber".tr(),
               hintText: "يتم كتابة الموبيل تلقائي في حالة الاشتراك المسبق",
               controller: phoneNumber),
           textFieldWithTitle(
-              title: "رقم  حساب صحة حلالك",
+              title: "appAccountNumber".tr(),
               hintText: "يتم كتابة رقم الحساب تلقائي في حالة الاشتراك المسبق",
               controller: accountNumber),
-          dropDownMenuWithTitle(
-              hintText: "حدد",
-              value: animalType,
-              title: "نوع الحيوان / الطير ",
-              items: [],
-              onChanged: (value) {}),
+          StatefulBuilder(
+            builder: (context, setState) {
+              return dropDownMenuWithTitle(
+                  hintText: "choose".tr(),
+                  value: animalType,
+                  title: "animalType".tr(),
+                  items: AppCubit.get(context).animalsModel.animals.map((e) {
+                    return DropdownMenuItem(
+                      child: Text(e.name),
+                      value: e.id,
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    animalType = value;
+                    setState(() {});
+                  });
+            },
+          ),
           Row(
             children: [
               Expanded(
                 child: textFieldWithTitle(
-                    title: "عدد الحيوانات ",
-                    hintText: "اضف العدد",
+                    title: "animalsNumber".tr(),
+                    hintText: "addNumber".tr(),
                     controller: animalsNumber),
               ),
               SizedBox(
                 width: 10,
               ),
-              Expanded(
-                child: dropDownMenuWithTitle(
-                    hintText: "المدينة/ الامارة",
-                    value: country,
-                    title: "",
-                    items: [],
-                    onChanged: (value) {}),
-              ),
+              StatefulBuilder(
+                builder: (context, setState) {
+                  return Expanded(
+                    child: dropDownMenuWithTitle(
+                        hintText: "City/Emirate".tr(),
+                        value: region,
+                        title: "",
+                        items:
+                            AppCubit.get(context).regionsModel.regions.map((e) {
+                          return DropdownMenuItem(
+                            child: Text(e.name),
+                            value: e.id,
+                          );
+                        }).toList(),
+                        onChanged: (value) {
+                          region = value;
+                          setState(() {});
+                        }),
+                  );
+                },
+              )
             ],
           ),
-          dropDownMenuWithTitle(
-              hintText: "شهري",
-              value: packageSubscription,
-              title: "الباقة المراد الاشتراك فيها ",
-              items: [],
-              onChanged: (value) {}),
+          StatefulBuilder(
+            builder: (context, setState) {
+              return dropDownMenuWithTitle(
+                  hintText: "monthly".tr(),
+                  value: packageSubscription,
+                  title: "thePackageYouWantToSubscribeTo".tr(),
+                  items: widget.packages.map((e) {
+                    return DropdownMenuItem(child: Text(e.name), value: e.id);
+                  }).toList(),
+                  onChanged: (value) {
+                    packageSubscription = value;
+                    print(packageSubscription);
+                    setState(() {});
+                  });
+            },
+          ),
           textFieldWithTitle(
-              title: "الموعد المناسب للكشف",
-              hintText: "الموعد المناسب للكشف",
+              title: "theAppropriateTimeForDetection".tr(),
+              hintText: "theAppropriateTimeForDetection".tr(),
               suffixIcon: InkWell(
-                  onTap: () {}, child: Icon(Icons.calendar_today_outlined)),
+                  onTap: () {
+                    showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(2050))
+                        .then((value) {
+                      if (value.toString().isNotEmpty) {
+                        surgeryTime.text = value.toString().substring(0, 10);
+                      } else {
+                        surgeryTime.text = "";
+                      }
+                    });
+                  },
+                  child: Icon(Icons.calendar_today_outlined)),
               controller: surgeryTime),
           textFieldWithTitle(
-              title: "العنوان بالتفصيل",
-              hintText: "العنوان بالتفصيل",
-              controller: description),
+              title: "addressInDetails".tr(),
+              hintText: "addressInDetails".tr(),
+              controller: address),
           TextButton(
-            onPressed: () {},
+            onPressed: () async {
+              final result =
+                  await navigateTo(context: context, page: LocationScreen());
+              address.text = result["address"];
+              lat = result["lat"];
+              long = result["long"];
+            },
             child: Row(
               children: [
                 Icon(
@@ -123,23 +177,27 @@ class PackageSubscription extends StatelessWidget {
                   color: kAppColor,
                 ),
                 Text(
-                  "حدد العنوان على الخريطة",
+                  "showInMap".tr(),
                   style: TextStyle(color: kAppColor),
                 )
               ],
             ),
           ),
           textFieldWithTitle(
-              title: "ملاحظات أخري",
-              hintText: "الشكوي المرضية التي يعاني منها الحيوان",
+              title: "otherNotes".tr(),
+              hintText: "diseaseComplaintsSufferedByTheAnimal".tr(),
               maxLines: 5,
               controller: otherNotes),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: customButton(
-                text: "اتمام عمليه الدفع",
+                text: "completePayment".tr(),
                 onPressed: () {
-                  navigateTo(context: context, page: PackagePaymentScreen.id);
+                  navigateTo(
+                      context: context,
+                      page: PackagePaymentScreen(packageId: packageSubscription, packagePrice: widget
+                          .packages[currentIndex]
+                          .price,),);
                 }),
           ),
         ],
@@ -147,17 +205,26 @@ class PackageSubscription extends StatelessWidget {
     );
   }
 
-  Widget buildItem() => IntrinsicHeight(
+  Widget buildItem(context, int index) => IntrinsicHeight(
         child: Container(
-          padding: EdgeInsets.all(10),
+          width: 80,
+          height: 60,
           decoration: BoxDecoration(
-              color: Colors.red.shade600,
+              color: kAppSecondColor.withOpacity(0.5),
+              border: currentIndex == index
+                  ? Border.all(color: Colors.black, width: 2)
+                  : null,
               borderRadius: BorderRadius.circular(10)),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("باقة شهرية"),
+              Text(AppCubit.get(context).packagesModel.packages[index].name),
               Text(
-                "5000 ريال",
+                AppCubit.get(context)
+                    .packagesModel
+                    .packages[index]
+                    .price
+                    .toString(),
                 style: TextStyle(
                     color: kAppColor,
                     fontSize: 15,

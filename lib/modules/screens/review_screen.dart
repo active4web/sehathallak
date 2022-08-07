@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
@@ -6,7 +7,7 @@ import 'package:se7a_7alalk/shared/widgets/components.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class ReviewScreen extends StatelessWidget {
-  static const String id = "ReviewScreen";
+  static const String id = "/ReviewScreen";
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,7 @@ class ReviewScreen extends StatelessWidget {
           ratingBar(),
           ratingBar(),
           ratingBar(),
-          customButton(onPressed: () {}, text: "اضف تقييمك"),
+          customButton(onPressed: () {}, text: "addYourReview".tr()),
           ListView.separated(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),

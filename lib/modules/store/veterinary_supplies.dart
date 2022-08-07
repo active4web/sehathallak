@@ -4,7 +4,7 @@ import 'package:se7a_7alalk/shared/components/gradient_app_bar.dart';
 import 'package:se7a_7alalk/shared/constants.dart';
 
 class VeterinarySupplies extends StatelessWidget {
-  static const String id = "VeterinarySupplies";
+  static const String id = "/VeterinarySupplies";
 
   @override
   Widget build(BuildContext context) {

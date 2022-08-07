@@ -1,10 +1,23 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:se7a_7alalk/cubits/store_cubit/store_cubit.dart';
+import 'package:se7a_7alalk/modules/layout/home_layout.dart';
+import 'package:se7a_7alalk/modules/screens/package_subscription_screen.dart';
+import 'package:se7a_7alalk/modules/screens/payment_screen.dart';
+import 'package:se7a_7alalk/shared/components/custom_dropdown_menu.dart';
+import 'package:se7a_7alalk/shared/components/custom_text_field.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../constants.dart';
 
 Widget customTextField(
         {String labelText,
         String hintText,
-        IconData prefixIcon,
+        Widget prefixIcon,
+        Function(String) validator,
+        Function onTap,
+        TextEditingController controller,
         Widget suffixIcon,
         TextInputType keyboardType,
         bool isPassword = false}) =>
@@ -15,18 +28,27 @@ Widget customTextField(
           labelText,
           style: TextStyle(
             color: kGreyColor,
-            fontSize: 13,
+            fontWeight: FontWeight.bold,
+            fontSize: 19,
           ),
         ),
-        TextField(
-          obscureText: isPassword,
-          keyboardType:
-              isPassword ? TextInputType.visiblePassword : keyboardType,
-          decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: TextStyle(fontSize: 14),
-              prefixIcon: Icon(prefixIcon),
-              suffixIcon: suffixIcon),
+        Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: kGreyColor, width: 2),
+              borderRadius: BorderRadius.circular(10)),
+          child: TextFormField(
+            obscureText: isPassword,
+            controller: controller,
+            validator: validator,
+            onTap: onTap,
+            keyboardType: isPassword ? TextInputType.visiblePassword : keyboardType,
+            decoration: InputDecoration(
+                hintText: hintText,
+                border: InputBorder.none,
+                hintStyle: TextStyle(fontSize: 14),
+                prefixIcon: prefixIcon,
+                suffixIcon: suffixIcon),
+          ),
         ),
       ],
     );
@@ -49,10 +71,12 @@ Widget customButton(
       ),
     );
 
-Future navigateTo({BuildContext context, String page, Object arguments}) =>
-    Navigator.pushNamed(context, page, arguments: arguments);
+Future navigateTo({BuildContext context, Widget page}) =>
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) => page,
+    ));
 
-Future<dynamic> buildSuccessDialog(context) {
+Future<dynamic> buildSuccessDialog({context, String msg}) {
   return showDialog(
     context: context,
     builder: (context) => Dialog(
@@ -65,12 +89,11 @@ Future<dynamic> buildSuccessDialog(context) {
                 alignment: Alignment.topLeft,
                 child: InkWell(
                     onTap: () {
-                      Navigator.pop(context);
+                      navigateTo(context: context,page: HomeLayout());
                     },
                     child: Image.asset("assets/images/close icon.png"))),
             Image.asset("assets/images/dialog image.png"),
-            Text("تم ارسال طلبك بنجاح"),
-            Text("انت مشترك بالباقة السنويه")
+            Text(msg)
           ],
         ),
       ),
@@ -97,20 +120,30 @@ Future<dynamic> buildPayServiceDialog(context) {
             Image.asset("assets/images/pay service.png"),
             Text("قيمة الخدمة 500 ريال"),
             Text("انت لست مشترك باحدى باقاتنا\nستنتقل الى شاشة الدفع"),
-            customButton(text: "إتمام الدفع", onPressed: () {}),
+            customButton(
+                text: "إتمام الدفع",
+                onPressed: () {
+                  navigateTo(context: context, page: PaymentScreen());
+                }),
             SizedBox(
               height: 5,
             ),
-            Container(
-              width: double.infinity,
-              height: 50,
-              decoration: BoxDecoration(
-                border: Border.all(color: kAppColor),
-              ),
-              child: Center(
-                child: Text(
-                  "الاشتراك بالباقات",
-                  style: TextStyle(color: kAppColor),
+            InkWell(
+              onTap: () {
+                navigateTo(page: PackageSubscription(
+                ), context: context);
+              },
+              child: Container(
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(color: kAppColor),
+                ),
+                child: Center(
+                  child: Text(
+                    "الاشتراك بالباقات",
+                    style: TextStyle(color: kAppColor),
+                  ),
                 ),
               ),
             )
@@ -121,20 +154,24 @@ Future<dynamic> buildPayServiceDialog(context) {
   );
 }
 
-Future navigateToAndStop({BuildContext context, String page}) =>
-    Navigator.pushNamedAndRemoveUntil(context, page, (route) => false);
+Future navigateToAndStop({BuildContext context, Widget page}) =>
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => page,), (route) => false);
 
-Widget customAppBar({String title, BuildContext context}) => AppBar(
+Widget customAppBar(
+        {String title, BuildContext context, bool canNavigate: true}) =>
+    AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
       automaticallyImplyLeading: false,
       actions: [
-        IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            color: Colors.white,
-            icon: Icon(Icons.arrow_forward, color: Colors.black)),
+        canNavigate
+            ? IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: Colors.white,
+                icon: Icon(Icons.arrow_forward, color: Colors.black))
+            : SizedBox(),
         SizedBox(
           width: 10,
         ),
@@ -159,13 +196,26 @@ Widget customDropDownMenu(
             fontSize: 13,
           ),
         ),
-        DropdownButtonHideUnderline(
-            child: DropdownButton(
-          items: items,
-          value: value,
-          isExpanded: true,
-          onChanged: onChanged,
-        ))
+
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(color: kGreyColor),
+              borderRadius: BorderRadius.circular(10)
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: DropdownButton(
+                underline: SizedBox(),
+                items: items,
+                value: value,
+                isExpanded: true,
+                onChanged: onChanged,
+              ),
+            ),
+          ),
+        )
       ],
     );
 
@@ -187,3 +237,104 @@ Widget buildImageContainer({String title, IconData icon, Function onPressed}) =>
             )),
       ),
     );
+
+Widget textFieldWithTitle(
+        {String title,
+        String hintText,
+        TextEditingController controller,
+        int maxLines,
+        Widget suffixIcon}) =>
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 15,
+          ),
+        ),
+        CustomTextField(
+          controller: controller,
+          hintText: hintText,
+          maxLines: maxLines,
+          suffixIcon: suffixIcon,
+        )
+      ],
+    );
+
+Widget dropDownMenuWithTitle(
+        {dynamic value,
+        String hintText,
+        Function onChanged,
+        List<DropdownMenuItem> items,
+        String title}) =>
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 15,
+          ),
+        ),
+        CustomDropDownMenu(
+          hintText: hintText,
+          value: value,
+          items: items,
+          onChange: onChanged,
+        ),
+      ],
+    );
+
+Future<bool> showToast({@required String text}) {
+  return Fluttertoast.showToast(
+      msg: text,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.SNACKBAR,
+      timeInSecForIosWeb: 1,
+      textColor: Colors.white,
+      fontSize: 16.0);
+}
+
+void launchURL(String url) async => await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+
+void launchWhatsApp(phone) async {
+  if (!await launch('https://wa.me/$phone')) throw 'Could not launch wa.me/$phone';
+}
+
+Future<void> showPhotoDialog(XFile file,context) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext) {
+        return AlertDialog(
+          title: Text(
+            "takeThePictureFrom".tr(),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextButton(
+                child: Text(
+                  "gallery".tr(),
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.right,
+                ),
+                onPressed: () async{
+                  file = await StoreCubit.get(context).pickImage(file: file,camera: false);
+                },
+              ),
+              TextButton(
+                child: Text(
+                  "camera".tr(),
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.right,
+                ),
+                onPressed: () async {
+                  file = await StoreCubit.get(context).pickImage(file: file,camera: true);
+                },
+              ),
+            ],
+          ),
+        );
+      });
+}

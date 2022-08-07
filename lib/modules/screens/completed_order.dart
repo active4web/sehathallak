@@ -5,7 +5,10 @@ import 'package:se7a_7alalk/shared/widgets/components.dart';
 import 'order_details.dart';
 
 class CompletedOrder extends StatelessWidget {
-  static const String id = "CompletedOrder";
+  final int orderId;
+  static const String id = "/CompletedOrder";
+
+  const CompletedOrder({Key key, this.orderId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,9 @@ class CompletedOrder extends StatelessWidget {
             customButton(
                 text: "orderDetails".tr(),
                 onPressed: () {
-                  navigateTo(context: context, page: OrderDetails.id);
+                  navigateTo(
+                      context: context,
+                      page: OrderDetails(orderId: orderId,));
                 }),
             TextButton(
                 onPressed: () {
